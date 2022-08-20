@@ -1,5 +1,7 @@
 package geneticAlgorithm;
 
+import java.util.Random;
+
 public class GeneticAlgorithm {
 	public static void main(String[] args) {
 		//variables used in all exmaples
@@ -19,12 +21,36 @@ public class GeneticAlgorithm {
 		int[] indiv3 = {1, 0, 1, 1, 0, 0, 1, 0, 0, 0}; //return 115
 		
 		int test = fitnessFunction(capWeight, weights, values, indiv3);
-		System.out.println(test);
+		//System.out.println(test);
+		
 		//genetic algorithm
 		//create population
+		int[][] population = generateRandomPopulation(numOfGenes, populationNum);
+		//test that it created a population with genes 1's and 0's
+		/*for(int i = 0; i < numOfGenes; i++) {
+			for(int j=0; j < populationNum; j++) { 
+				System.out.print(population[i][j]);
+			}
+			System.out.println("");
+		}*/
+		
 		//do crossover
 		//do mutations
 		//return best gene
+	}
+	public static int[][] generateRandomPopulation(int numOfGenes, int populationNum){
+		//create a Random object
+		Random rand = new Random();
+		//create population
+		int[][] population = new int[numOfGenes][populationNum];
+		//add gene allelles to population
+		for(int i = 0; i < numOfGenes; i++) {
+			for(int j=0; j < populationNum; j++) {
+				int random = rand.nextInt(2); 
+				population[i][j] = random;
+			}
+		}
+		return population;
 	}
 	public static int fitnessFunction(int capWeight, int[] weights, int[] values, int[] individual) {
 		//integers to hold the total weight and value of the individual
