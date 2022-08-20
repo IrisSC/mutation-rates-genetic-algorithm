@@ -60,7 +60,7 @@ public class GeneticAlgorithm {
 			//select ones in ternimant
 			int[] touramentIndivs = new Random().ints(0, populationNum-1).distinct().limit(4).toArray();
 			//pick the two with the highest fitness
-			int[] twoFittested = highestFitness(capWeight, weights, values, population, 
+			int[] twoFittested = twoHighestFitness(capWeight, weights, values, population, 
 					touramentIndivs, 2, numOfGenes);
 			//crossover
 			for(int j = 0; j < numOfGenes; j++) {
@@ -77,53 +77,65 @@ public class GeneticAlgorithm {
 		}
 		int[] touramentIndivs = new Random().ints(0, populationNum-1).distinct().limit(4).toArray();
 		//get fittest individual
-		int[] fittest = highestFitness(capWeight, weights, values, population, touramentIndivs, 1, numOfGenes);
+		int fittest = highestFitness(capWeight, weights, values, population, numOfGenes);
 		
 		//add fittest to new population
 		for(int i = 0; i < numOfGenes; i++) {
-			newPop[populationNum-1][i] = population[fittest[0]][i];
+			newPop[populationNum-1][i] = population[fittest][i];
 		}
 		return newPop;
 	}
-	public static int[] highestFitness(int capWeight, int[] weights, int[] values, int[][] population,
+	public static int[] twoHighestFitness(int capWeight, int[] weights, int[] values, int[][] population,
 			int[] tournamentIndiv, int numGenerated, int numOfGenes) {
-		int[] highest = new int[numGenerated];
-		if(numGenerated == 2) {
-			highest[0] = 0;
-			highest[1] = 1;
-			int high1 = -1;
-			int high2 = -1;
-			for(int i = 0; i < 4; i++) {
-				int[] individual = new int[numOfGenes];
-				for(int j = 0; j < numOfGenes; j++) {
-					individual[j] = population[tournamentIndiv[i]][j];
-				}
-				int fitness = fitnessFunction(capWeight, weights, values, individual);
-				if(fitness > high1) {
-					high2 = high1;
-					high1 = fitness;
-					highest[1] = highest[0];
-					highest[0] = tournamentIndiv[i];
-				}else if(fitness > high2){
-					high2 = fitness;
-					highest[1] = tournamentIndiv[i];
-				}
+		//contains the number in the population f the two highest individuals
+		//set so it will at least of a couple highest
+		int[] highest = {0, 1};
+		//defualt values for the two highest
+		int high1 = -1;
+		int high2 = -1;
+		//iterates through each one in the termanent
+		for(int i = 0; i < 4; i++) {
+			//copies current individual in the teramines
+			int[] individual = new int[numOfGenes];
+			for(int j = 0; j < numOfGenes; j++) {
+				individual[j] = population[tournamentIndiv[i]][j];
 			}
-		}else {
-			highest[0] = 0;
-			int high = -1;
-			for(int i = 0; i < population.length; i++) {
-				int[] individual = new int[numOfGenes];
-				for(int j = 0; j < numOfGenes; j++) {
-					individual[j] = population[i][j];
-				}
-				int fitness = fitnessFunction(capWeight, weights, values, individual);
-				if(fitness > high) {
-					high = fitness;
-					highest[0] = tournamentIndiv[i];
-				}
+			//gets the individuals fittness
+			int fitness = fitnessFunction(capWeight, weights, values, individual);
+			//if the fitness is higher then any of the two highest, it will reset the
+			//highest fitness
+			if(fitness > high1) {
+				high2 = high1;
+				high1 = fitness;
+				highest[1] = highest[0];
+				highest[0] = tournamentIndiv[i];
+			}else if(fitness > high2){
+				high2 = fitness;
+				highest[1] = tournamentIndiv[i];
 			}
 		}
+		return highest;
+	}
+	
+	public static int highestFitness(int capWeight, int[] weights, int[] values, int[][] population, int numOfGenes) {
+		//highest is the indext of the highest and high is the fitness value
+		int highest = 0;
+		int high = -1;
+		
+		for(int i = 0; i < population.length; i++) {
+			//gets the fitness for each individual in the population
+			int[] individual = new int[numOfGenes];
+			for(int j = 0; j < numOfGenes; j++) {
+				individual[j] = population[i][j];
+			}
+			int fitness = fitnessFunction(capWeight, weights, values, individual);
+			//if fitness is higher then switch highest fitness
+			if(fitness > high) {
+				high = fitness;
+				highest = i;
+			}
+		}
+		//return the index of the individual with the highest fitness
 		return highest;
 	}
 	public static int[][] generateRandomPopulation(int numOfGenes, int populationNum){
