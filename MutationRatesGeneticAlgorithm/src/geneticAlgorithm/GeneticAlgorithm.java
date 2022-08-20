@@ -13,7 +13,7 @@ public class GeneticAlgorithm {
 		int maxValue = 295;
 		int[] weights = {95, 4, 60, 32, 23, 72, 80, 62, 65, 46};
 		int[] values = {55, 10, 47, 5, 4, 50, 8, 61, 85, 87};
-		double[] mutationRate = {0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01};
+		double[] mutationRates = {0.5, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01};
 		
 		//individuals to test the fitness function with
 		int[]indiv1 = {1, 1, 1, 1, 1, 1, 0, 0, 0, 0}; //return -1
@@ -44,7 +44,32 @@ public class GeneticAlgorithm {
 			System.out.println("");
 		}
 		//do mutations
+		mutations(newPop, mutationRates, numOfGenes);
+		System.out.println("mutated individuals");
+		for(int i = 0; i < newPop.length; i++) {
+			for(int j=0; j < numOfGenes; j++) { 
+				System.out.print(newPop[i][j]);
+			}
+			System.out.println("");
+		}
 		//return best gene
+	}
+	public static void mutations(int[][] population, double[] mutationRates, int numOfGenes) {
+		//create a Random object
+		Random rand = new Random();
+		
+		for(int i = 0; i < population.length; i++) {
+			for(int j=0; j < numOfGenes; j++) {
+				int mutate = rand.nextInt(100);
+				if(mutate < mutationRates[j]*100) {
+					if(population[i][j] == 0) {
+						population[i][j] = 1;
+					}else {
+						population[i][j] = 0;
+					}
+				}
+			}
+		}
 	}
 	public static int[][] newPop(int capWeight, int[] weights, int[] values, 
 			int[][] population, int numOfGenes, int populationNum){
