@@ -5,7 +5,9 @@ import java.util.Random;
 public class GeneticAlgorithm {
 	public static void main(String[] args) {
 		//variables used in all exmaples
-		int populationNum = 4;
+		int populationNum = 10;
+		int numSame = 0;
+		int currentFittest = -1;
 		
 		//example one
 		int numOfGenes = 10;
@@ -33,26 +35,42 @@ public class GeneticAlgorithm {
 			}
 			System.out.println("");
 		}
-		System.out.println("New Population");
-		//do crossover
-		//need to change to copy
-		int[][] newPop = newPop(capWeight, weights, values, population, numOfGenes, populationNum).clone();
-		for(int i = 0; i < newPop.length; i++) {
-			for(int j=0; j < numOfGenes; j++) { 
-				System.out.print(newPop[i][j]);
+		while(numSame < 3) {
+			System.out.println("New Population");
+			//do crossover
+			int[][] newPop = newPop(capWeight, weights, values, population, numOfGenes, populationNum).clone();
+			for(int i = 0; i < newPop.length; i++) {
+				for(int j=0; j < numOfGenes; j++) { 
+					System.out.print(newPop[i][j]);
+				}
+				System.out.println("");
 			}
-			System.out.println("");
-		}
-		//do mutations
-		mutations(newPop, mutationRates, numOfGenes);
-		System.out.println("mutated individuals");
-		for(int i = 0; i < newPop.length; i++) {
-			for(int j=0; j < numOfGenes; j++) { 
-				System.out.print(newPop[i][j]);
+			//do mutations
+			mutations(newPop, mutationRates, numOfGenes);
+			System.out.println("mutated individuals");
+			for(int i = 0; i < newPop.length; i++) {
+				for(int j=0; j < numOfGenes; j++) { 
+					System.out.print(newPop[i][j]);
+				}
+				System.out.println("");
 			}
-			System.out.println("");
+			//return best gene
+			int mostFit = highestFitness(capWeight, weights, values, newPop, numOfGenes);
+			int[] mostFitIndiv = new int[numOfGenes];
+			for(int i = 0; i < numOfGenes; i++) {
+				mostFitIndiv[i] = newPop[mostFit][i];
+			}
+			int mostFitValue = fitnessFunction(capWeight, weights, values, mostFitIndiv);
+			System.out.println("Most fit Indiv is: " + mostFit + " with a value of: " + mostFitValue);
+			
+			if(mostFitValue == currentFittest) {
+				numSame = numSame + 1;
+			}else {
+				numSame = 0;
+				currentFittest = mostFitValue;
+			}
 		}
-		//return best gene
+		System.out.println("percent close: " + (double)currentFittest/(double)maxValue);
 	}
 	public static void mutations(int[][] population, double[] mutationRates, int numOfGenes) {
 		//create a Random object
