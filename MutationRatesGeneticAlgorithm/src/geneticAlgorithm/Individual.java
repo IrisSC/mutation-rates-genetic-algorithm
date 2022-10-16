@@ -134,7 +134,7 @@ public class Individual {
 	/*
 	 * sets the mutation rate
 	 */
-	public void setMuationRate(int mutationRate) {
+	public void setMuationRate(double mutationRate) {
 		this.mutationRate = mutationRate;
 	}
 }
