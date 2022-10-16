@@ -5,7 +5,7 @@ import java.util.Random;
 public class GeneticAlgorithm {
 	public static void main(String[] args) {
 		//variables used in all exmaples
-		int populationNum = 10;
+		int populationNum = 100;
 		int numSame = 0;
 		int currentFittest = -1;
 		
