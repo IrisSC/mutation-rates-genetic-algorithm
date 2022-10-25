@@ -78,7 +78,7 @@ public abstract class Individual {
 	/*
 	 * Each type of individual will have a different set of things to crossover
 	 */
-	public abstract void crossover();
+	public abstract int[] crossover(Individual in);
 	
 	/*
 	 * @returns the length of the solution
