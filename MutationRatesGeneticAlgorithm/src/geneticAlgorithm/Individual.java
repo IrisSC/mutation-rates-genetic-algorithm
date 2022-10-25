@@ -2,15 +2,11 @@ package geneticAlgorithm;
 
 import java.util.Random;
 
-public class Individual {
+public abstract class Individual {
 	//length of solution
-	private int length;
+	protected int length;
 	//this array represents a solution to the problem
-	private int[] solutionChromosome;
-	//self-adapting mutation rate for testing
-	private double mutationRate;
-	//self-adapting gene specific mutation rate (another chromosome)
-	private double[] geneSpecificMutationRates; 
+	protected int[] solutionChromosome;
 	
 	/*
 	 * Individual constructor that takes in the length of the solution
@@ -23,50 +19,19 @@ public class Individual {
 		
 		//create Individual solution
 		this.solutionChromosome = createSolution(solutionLength);
-		
-		//set mutation rate
-		this.mutationRate = 0.2;
-		
-		//create gene specific mutation rates
-		this.geneSpecificMutationRates = createUniformMutationChromosome(solutionLength, (double)0.2);
-	}
-	
-	/*
-	 * Individual constructor that takes in the length of the solution and mutation rate
-	 * mutation rate chromosome are set to be 0.2
-	 * the solution is randomly generated
-	 */
-	public Individual(int solutionLength, double mutationRate) {
-		//set solution length
-		this.length = solutionLength;
-		
-		//create individual solution
-		this.solutionChromosome = createSolution(solutionLength);
-		
-		//set mutation rate
-		this.mutationRate = mutationRate;
-		
-		//create gene specific mutation rates
-		this.geneSpecificMutationRates = createUniformMutationChromosome(solutionLength, (double)0.2);
 	}
 	
 	/*
 	 * Individual constructor that takes in the solution, length of the solution and mutation rate
 	 * mutation rate chromosome are set to be 0.2
 	 */
-	public Individual(int solutionLength, double mutationRate, int[] solution) {
+	public Individual(int solutionLength, int[] solution) {
 		//set solution length
 		this.length = solutionLength;
 		
 		//set individual solution
 		this.solutionChromosome = new int[solutionLength];
 		this.solutionChromosome = solution.clone();
-		
-		//set mutation rate
-		this.mutationRate = mutationRate;
-		
-		//create gene specific mutation rates
-		this.geneSpecificMutationRates = createUniformMutationChromosome(solutionLength, (double)0.2);
 	}
 	
 	/*
@@ -105,6 +70,17 @@ public class Individual {
 	}
 	
 	/*
+	 * Each type of individual will mutate differently
+	 */
+	public abstract void mutation();
+	
+	
+	/*
+	 * Each type of individual will have a different set of things to crossover
+	 */
+	public abstract void crossover();
+	
+	/*
 	 * @returns the length of the solution
 	 */
 	public int getLength() {
@@ -116,25 +92,5 @@ public class Individual {
 	 */
 	public int[] getSolutionChromosome() {
 		return this.solutionChromosome;
-	}
-	/*
-	 * @returns the mutation rate
-	 */
-	public double getMutationRate() {
-		return this.mutationRate;
-	}
-	
-	/*
-	 * @returns the mutation chromosome
-	 */
-	public double[] getGeneSpecificMutationRate() {
-		return this.geneSpecificMutationRates;
-	}
-	
-	/*
-	 * sets the mutation rate
-	 */
-	public void setMuationRate(double mutationRate) {
-		this.mutationRate = mutationRate;
 	}
 }
