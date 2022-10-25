@@ -5,7 +5,7 @@ import java.util.Random;
 public class IndivStaticMutate extends Individual{
 	
 	//the static mutation rate 
-	private int staticMutationRate;
+	private double staticMutationRate;
 	
 	/*
 	 * IndivStaticMutate constructor.
@@ -13,7 +13,7 @@ public class IndivStaticMutate extends Individual{
 	 * mutationRate is assigned to staticMuationRate
 	 * solutionLength is passes to the Individual constructor
 	 */
-	public IndivStaticMutate(int solutionLength, int mutationRate) {
+	public IndivStaticMutate(int solutionLength, double mutationRate) {
 		super(solutionLength);
 		
 		//set mutation rate
@@ -26,7 +26,7 @@ public class IndivStaticMutate extends Individual{
 	 * mutationRate is assigned to staticMuationRate
 	 * solutionLength and solution are is passes to the Individual constructor
 	 */
-	public IndivStaticMutate(int solutionLength, int[] solution, int mutationRate) {
+	public IndivStaticMutate(int solutionLength, int[] solution, double mutationRate) {
 		super(solutionLength, solution);
 		
 		//set mutation rate
@@ -86,14 +86,14 @@ public class IndivStaticMutate extends Individual{
 	/*
 	 * Sets the static mutation rate
 	 */
-	public void setMutationRate(int mutationRate) {
+	public void setMutationRate(double mutationRate) {
 		this.staticMutationRate = mutationRate;
 	}
 	
 	/*
 	 * returns that static mutation rate
 	 */
-	public int getMutationRate() {
+	public double getMutationRate() {
 		return this.staticMutationRate;
 	}
 }
