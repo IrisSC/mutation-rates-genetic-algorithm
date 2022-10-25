@@ -7,6 +7,8 @@ public abstract class Individual {
 	protected int length;
 	//this array represents a solution to the problem
 	protected int[] solutionChromosome;
+	//create random object
+	protected static Random rand = new Random();
 	
 	/*
 	 * Individual constructor that takes in the length of the solution
@@ -41,8 +43,6 @@ public abstract class Individual {
 	 * 		a randomly generate solution. This solution is made out of 1's and 0's
 	 */
 	private static int[] createSolution(int solutionLength) {
-		//create a Random object
-		Random rand = new Random();
 		//create solution
 		int[] solution = new int[solutionLength];
 		//assigns each gene a 1 or 0

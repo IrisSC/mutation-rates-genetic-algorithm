@@ -42,8 +42,6 @@ public class IndivStaticMutate extends Individual{
 	 */
 	@Override
 	public void mutation() {
-		//create a Random object
-		Random rand = new Random();
 		
 		//goes through every gene in the solution
 		for(int i=0; i < solutionChromosome.length; i++) {

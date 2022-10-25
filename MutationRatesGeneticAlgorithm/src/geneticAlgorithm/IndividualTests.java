@@ -57,4 +57,47 @@ class IndividualTests {
 		
 		assertEquals("mutation rate reset to 0.3", test3.getMutationRate(), 0.3, 0);
 	}
+	
+	/*
+	 * Tests the mutation function for the static individual
+	 */
+	@Test
+	void staticMutationMethod() {
+		//create new individual with static mutation
+		IndivStaticMutate test4 = new IndivStaticMutate(100, 0.2);
+		
+		//count the number of genes mutated vs genes
+		double numOfGenes = 0;
+		double numOfGenesMutated = 0;
+		
+		//mutates the individuals solution n times
+		for(int i=0; i < 1000; i++) {
+			int[] oldSolution = test4.solutionChromosome.clone();
+			test4.mutation();
+			
+			numOfGenes = numOfGenes + test4.getLength();
+			for(int j=0; j < test4.getLength(); j++) {
+				if(oldSolution[j] != test4.solutionChromosome[j]) {
+					numOfGenesMutated = numOfGenesMutated + 1;
+				}
+			}
+		}
+		
+		//gets the rate of mutations in this test
+		double testMutationRate = numOfGenesMutated/numOfGenes;
+		
+		System.out.println(numOfGenes);
+		System.out.println(numOfGenesMutated);
+		System.out.println(testMutationRate);
+		
+		assertEquals("test mutation rate is close to actaul mutation rate", test4.getMutationRate(), 0.2, 0);
+	}
+	
+	/*
+	 * Tests the crossover function for the static individual
+	 */
+	@Test
+	void staticCrossoverMethod() {
+		
+	}
 }
