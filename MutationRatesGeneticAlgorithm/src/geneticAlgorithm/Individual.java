@@ -28,12 +28,12 @@ public abstract class Individual {
 	 * Individual constructor that takes in the solution, length of the solution and mutation rate
 	 * mutation rate chromosome are set to be 0.2
 	 */
-	public Individual(int solutionLength, int[] solution) {
+	public Individual(int[] solution) {
 		//set solution length
-		this.length = solutionLength;
+		this.length = solution.length;
 		
 		//set individual solution
-		this.solutionChromosome = new int[solutionLength];
+		this.solutionChromosome = new int[solution.length];
 		this.solutionChromosome = solution.clone();
 	}
 	

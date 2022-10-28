@@ -28,8 +28,8 @@ public class IndivStaticMutate extends Individual{
 	 * mutationRate is assigned to staticMuationRate
 	 * solutionLength and solution are is passes to the Individual constructor
 	 */
-	public IndivStaticMutate(int solutionLength, int[] solution, double mutationRate) {
-		super(solutionLength, solution);
+	public IndivStaticMutate(int[] solution, double mutationRate) {
+		super(solution);
 		
 		//set mutation rate
 		this.staticMutationRate = mutationRate;
@@ -87,8 +87,8 @@ public class IndivStaticMutate extends Individual{
 			newSolution2[j] = this.solutionChromosome[j];
 		}
 		
-		IndivStaticMutate indiv1 = new IndivStaticMutate(this.length, newSolution1, this.staticMutationRate);
-		IndivStaticMutate indiv2 = new IndivStaticMutate(this.length, newSolution2, this.staticMutationRate);
+		IndivStaticMutate indiv1 = new IndivStaticMutate(newSolution1, this.staticMutationRate);
+		IndivStaticMutate indiv2 = new IndivStaticMutate(newSolution2, this.staticMutationRate);
 		newSolution.add(indiv1);
 		newSolution.add(indiv2);
 		

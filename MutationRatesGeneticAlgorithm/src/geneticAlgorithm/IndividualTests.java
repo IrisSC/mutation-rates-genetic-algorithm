@@ -36,7 +36,7 @@ class IndividualTests {
 	@Test
 	void createIndividual2() {
 		int[] solution = {1, 0, 0};
-		IndivStaticMutate test2 = new IndivStaticMutate(3, solution, 0.4);
+		IndivStaticMutate test2 = new IndivStaticMutate(solution, 0.4);
 		
 		assertEquals("length was set correctly", test2.getLength(), 3);
 		assertEquals("length of solution is correct", test2.getSolutionChromosome().length, 3);
@@ -104,8 +104,8 @@ class IndividualTests {
 		int[] solution1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 		int[] solution2 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		//create the parent individuals
-		IndivStaticMutate test5 = new IndivStaticMutate(10, solution1,  0.2);
-		IndivStaticMutate test6 = new IndivStaticMutate(10, solution2,  0.2);
+		IndivStaticMutate test5 = new IndivStaticMutate(solution1,  0.2);
+		IndivStaticMutate test6 = new IndivStaticMutate(solution2,  0.2);
 		
 		//crossover the parent individual
 		List<Individual> crossoverIndivs = test5.crossover(test6);
