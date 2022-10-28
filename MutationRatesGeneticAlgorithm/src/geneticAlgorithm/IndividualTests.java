@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 class IndividualTests {
@@ -98,6 +100,30 @@ class IndividualTests {
 	 */
 	@Test
 	void staticCrossoverMethod() {
+		//create solutions for the parent individuals
+		int[] solution1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+		int[] solution2 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		//create the parent individuals
+		IndivStaticMutate test5 = new IndivStaticMutate(10, solution1,  0.2);
+		IndivStaticMutate test6 = new IndivStaticMutate(10, solution2,  0.2);
 		
+		//crossover the parent individual
+		List<Individual> crossoverIndivs = test5.crossover(test6);
+		
+		//get the two children individuals
+		IndivStaticMutate test7 = (IndivStaticMutate) crossoverIndivs.get(0);
+		IndivStaticMutate test8 = (IndivStaticMutate) crossoverIndivs.get(1);
+		
+		//test child one crossover point
+		assertEquals("gene at index 0 is 1", test7.getSolutionChromosome()[0], 1);
+		assertEquals("gene at index 3 is 1", test7.getSolutionChromosome()[3], 1);
+		assertEquals("gene at index 5 is 0", test7.getSolutionChromosome()[5], 0);
+		assertEquals("gene at index 9 is 0", test7.getSolutionChromosome()[9], 0);
+		
+		//test child two crossover point
+		assertEquals("gene at index 0 is 0", test8.getSolutionChromosome()[0], 0);
+		assertEquals("gene at index 3 is 0", test8.getSolutionChromosome()[3], 0);
+		assertEquals("gene at index 5 is 1", test8.getSolutionChromosome()[5], 1);
+		assertEquals("gene at index 9 is 1", test8.getSolutionChromosome()[9], 1);
 	}
 }
