@@ -1,5 +1,7 @@
 package geneticAlgorithm;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class IndivStaticMutate extends Individual{
@@ -67,17 +69,29 @@ public class IndivStaticMutate extends Individual{
 	 * 		returns the new solution created from crossover
 	 */
 	@Override
-	public int[] crossover(Individual in){
+	public List<Individual> crossover(Individual in){
 		//Random rand = new Random();
 		int crossoverpoint = (int)this.length/2;
 		
-		int[] newSolution = new int[this.length];
+		List<Individual> newSolution = new ArrayList<Individual>();
+		
+		int[] newSolution1 = new int[this.length];
+		int[] newSolution2 = new int[this.length];
+		
 		for(int i = 0; i < crossoverpoint; i++) {
-			newSolution[i] = this.solutionChromosome[i];
+			newSolution1[i] = this.solutionChromosome[i];
+			newSolution2[i] = in.solutionChromosome[i];
 		}
 		for(int j = crossoverpoint; j < this.length; j++) {
-			newSolution[j] = in.solutionChromosome[j];
+			newSolution1[j] = in.solutionChromosome[j];
+			newSolution2[j] = this.solutionChromosome[j];
 		}
+		
+		IndivStaticMutate indiv1 = new IndivStaticMutate(this.length, newSolution1, this.staticMutationRate);
+		IndivStaticMutate indiv2 = new IndivStaticMutate(this.length, newSolution2, this.staticMutationRate);
+		newSolution.add(indiv1);
+		newSolution.add(indiv2);
+		
 		return newSolution;
 	}
 	

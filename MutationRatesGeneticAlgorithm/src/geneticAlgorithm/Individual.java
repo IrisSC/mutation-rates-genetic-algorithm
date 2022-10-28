@@ -1,5 +1,6 @@
 package geneticAlgorithm;
 
+import java.util.List;
 import java.util.Random;
 
 public abstract class Individual {
@@ -78,7 +79,7 @@ public abstract class Individual {
 	/*
 	 * Each type of individual will have a different set of things to crossover
 	 */
-	public abstract int[] crossover(Individual in);
+	public abstract List<Individual> crossover(Individual in);
 	
 	/*
 	 * @returns the length of the solution
