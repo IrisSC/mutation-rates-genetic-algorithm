@@ -55,7 +55,7 @@ public class KnapSack1 extends Knapsack{
 			}
 		}
 		if(totWeight > this.cap) {
-			return -1;
+			return 0;
 		}
 		else {
 			return totValue;
