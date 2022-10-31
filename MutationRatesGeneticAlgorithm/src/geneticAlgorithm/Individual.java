@@ -82,6 +82,12 @@ public abstract class Individual {
 	public abstract List<Individual> crossover(Individual in);
 	
 	/*
+	 * Implementation should create a new individual with a randomly generate solution
+	 * of its individual type
+	 */
+	public abstract Individual createRandomIndiv();
+	
+	/*
 	 * @returns the length of the solution
 	 */
 	public int getLength() {
