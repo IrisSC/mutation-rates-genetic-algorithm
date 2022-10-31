@@ -15,7 +15,25 @@ public class Population {
 	public Population(int numPop, Individual indiv, Knapsack knapsack) {
 		this.numPop = numPop;
 		this.knapsack = knapsack;
-		//generate pop from create new individual 
+		//generate pop from create new individual
+		pop.add(indiv);
+		for(int i=1; i < numPop; i++) {
+			Individual newIndiv = indiv.createRandomIndiv();
+			pop.add(newIndiv);
+		}
+	}
+	
+	/*
+	 * Population Constructor
+	 * @param List<Individual>
+	 * 		The list of individuals in the population
+	 * @param knapsack
+	 * 		the knapsack problem that this population is trying to solve
+	 */
+	public Population(List<Individual> pop, Knapsack knapsack) {
+		this.pop = pop;
+		this.numPop = pop.size();
+		this.knapsack = knapsack;
 	}
 	
 	/*
