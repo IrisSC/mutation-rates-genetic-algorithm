@@ -96,6 +96,20 @@ public class IndivStaticMutate extends Individual{
 	}
 	
 	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.Individual#createRandomIndiv()
+	 * 
+	 * @return Individual
+	 * 		a new static mutation individual with a randomly gnerate solution
+	 */
+	public Individual createRandomIndiv() {
+		//create new individual
+		IndivStaticMutate indiv = new IndivStaticMutate(this.length, this.staticMutationRate);
+		
+		return indiv;
+	}
+	
+	/*
 	 * Sets the static mutation rate
 	 */
 	public void setMutationRate(double mutationRate) {
