@@ -7,8 +7,32 @@ import org.junit.jupiter.api.Test;
 class PopulationTests {
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void constructor() {
+		
 	}
-
+	
+	@Test
+	void knapsackSetter() {
+		
+	}
+	
+	@Test
+	void minFitnessValue() {
+		
+	}
+	
+	@Test
+	void maxFitnessValue() {
+		
+	}
+	
+	@Test
+	void avgFitnessValue() {
+		
+	}
+	
+	@Test
+	void stanardDeviation() {
+		
+	}
 }
