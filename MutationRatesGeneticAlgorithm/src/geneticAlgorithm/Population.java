@@ -27,6 +27,22 @@ public class Population {
 	}
 	
 	/*
+	 * @return Knapsack
+	 * 		the knapsack problem for this population
+	 */
+	public Knapsack getKnapsack() {
+		return this.knapsack;
+	}
+	
+	/*
+	 * @param Knapsack
+	 * 		input the new Knapsack problem for this population
+	 */
+	public void setKnapsack(Knapsack sack) {
+		this.knapsack = sack;
+	}
+	
+	/*
 	 * @returns List<Individual>
 	 * 		the List of individuals in the population
 	 */
