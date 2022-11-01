@@ -107,14 +107,14 @@ public class Population {
 	 * 		This function returns the average or mean fitness of the population 
 	 */
 	public double avgFitness() {
-		int totalFitness = 0;
+		double totalFitness = 0;
 		
 		for(int i = 0; i < pop.size(); i++) {
 			Individual indiv = pop.get(i);
 			int fitness = knapsack.fitness(indiv);
 			totalFitness = totalFitness + fitness;
 		}
-		return totalFitness/this.numPop;
+		return Math.round((totalFitness/(double)this.numPop)*100.0)/100.0;
 	}
 	
 	/*
@@ -130,10 +130,10 @@ public class Population {
 		for(int i=0; i < this.pop.size(); i++) {
 			Individual indiv = pop.get(i);
 			int fitness = knapsack.fitness(indiv);
-			stanDev = stanDev + Math.pow(fitness-mean, 2);
+			stanDev = stanDev + Math.pow((double)fitness-mean, 2);
 		}
 		
-		stanDev = Math.sqrt(stanDev/this.numPop);
+		stanDev = Math.round(Math.sqrt(stanDev/this.numPop)*100.0)/100.0;
 		
 		return stanDev;
 	}
