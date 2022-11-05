@@ -71,6 +71,11 @@ public abstract class Individual {
 	}
 	
 	/*
+	 * Each type of individual will have different criteria for an individual being equal
+	 */
+	public abstract boolean equals(Individual indiv);
+	
+	/*
 	 * Each type of individual will mutate differently
 	 */
 	public abstract void mutation();
