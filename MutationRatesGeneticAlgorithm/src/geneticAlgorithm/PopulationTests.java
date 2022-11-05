@@ -1,6 +1,7 @@
 package geneticAlgorithm;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -182,8 +183,11 @@ class PopulationTests {
 		assertEquals("best fit indiviudal's doesn't have item 9", bestFit.getSolutionChromosome()[9], 0);
 	}
 	
+	/*
+	 * tests that each parent will eventually be selected
+	 */
 	@Test
-	void getParent() {
+	void getParent1() {
 		int[] solution1 = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
 		int[] solution2 = {0, 1, 0, 0, 1, 1, 0, 0, 0, 1};
 		int[] solution3 = {0, 1, 1, 1, 1, 0, 1, 0, 1, 0};
@@ -203,7 +207,28 @@ class PopulationTests {
 		KnapSack1 sack1 = new KnapSack1();
 		
 		Population pop = new Population(indivList, sack1);
-		//create a Individual equals method in the indvidual classes
+		
+		boolean s1 = false;
+		boolean s2 = false;
+		boolean s3 = false;
+		boolean s4 = false;
+		
+		for(int i = 0; i < 1000; i++) {
+			Individual parent = pop.getParent(2);
+			if(parent.equals(indiv1)) {
+				s1 = true;
+			}else if(parent.equals(indiv2)) {
+				s2 = true;
+			}else if(parent.equals(indiv3)) {
+				s3 = true;
+			}else if(parent.equals(indiv4)) {
+				s4 = true;
+			}
+		}
+		assertTrue("Individual 1 has been returned as a parent", s1);
+		assertTrue("Individual 2 has been returned as a parent", s2);
+		assertTrue("Individual 3 has been returned as a parent", s3);
+		assertTrue("Individual 4 has been returned as a parent", s4);
 	}
 	
 	@Test
