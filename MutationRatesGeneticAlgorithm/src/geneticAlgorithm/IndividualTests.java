@@ -1,7 +1,8 @@
 package geneticAlgorithm;
 
 import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
@@ -58,6 +59,19 @@ class IndividualTests {
 		test3.setMutationRate(0.3);
 		
 		assertEquals("mutation rate reset to 0.3", test3.getMutationRate(), 0.3, 0);
+	}
+	
+	@Test
+	void staticMutateEquals() {
+		int[] solution1 = {1, 0, 1, 0};
+		int[] solution2 = {1, 1, 1, 0};
+		
+		IndivStaticMutate indiv1 = new IndivStaticMutate(solution1, 0.2);
+		IndivStaticMutate indiv2 = new IndivStaticMutate(solution1, 0.2);
+		IndivStaticMutate indiv3 = new IndivStaticMutate(solution2, 0.2);
+		
+		assertTrue("Indiv1 and Indiv2 are equal", indiv1.equals(indiv2));
+		assertFalse("Indiv1 and Indiv3 are not equal", indiv1.equals(indiv3));
 	}
 	
 	/*
