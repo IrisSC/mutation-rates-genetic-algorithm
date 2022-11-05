@@ -1,5 +1,7 @@
 package geneticAlgorithm;
 
+import static org.junit.jupiter.api.Assumptions.assumingThat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,6 +35,31 @@ public class IndivStaticMutate extends Individual{
 		
 		//set mutation rate
 		this.staticMutationRate = mutationRate;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.Individual#equals(geneticAlgorithm.Individual)
+	 * 
+	 * @param Individual
+	 * 		the individual that this individual is checking if they are the same
+	 * @return boolean
+	 * 		true if the indiv's solutionChomosome is equal to this solutionChomosome else
+	 * return false
+	 */
+	@Override
+	public boolean equals(Individual indiv) {
+		
+		if(this.solutionChromosome.length != indiv.solutionChromosome.length) {
+			return false;
+		}
+		for(int i = 0; i < this.solutionChromosome.length; i++) {
+			if(this.solutionChromosome[i] != indiv.solutionChromosome[i]) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 	/*
