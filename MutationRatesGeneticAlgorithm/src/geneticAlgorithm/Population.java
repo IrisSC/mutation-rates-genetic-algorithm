@@ -1,12 +1,16 @@
 package geneticAlgorithm;
 
 import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Random;
 
 public class Population {
 	List<Individual> pop = new ArrayList<Individual>();
 	int numPop;
 	Knapsack knapsack;
+	//create random object
+	protected static Random rand = new Random();
 	
 	/*
 	 * Population constructor
@@ -64,8 +68,17 @@ public class Population {
 	 * @returns List<Individual>
 	 * 		the List of individuals in the population
 	 */
-	public List<Individual> getPopultion(){
+	public List<Individual> getPopulation(){
 		return this.pop;
+	}
+	
+	/*
+	 * This method adds an individual to the population. And increases the population
+	 * size by one
+	 */
+	public void addIndiv(Individual indiv) {
+		this.pop.add(indiv);
+		this.numPop = this.numPop + 1;
 	}
 	
 	/* 
@@ -136,5 +149,84 @@ public class Population {
 		stanDev = Math.round(Math.sqrt(stanDev/this.numPop)*100.0)/100.0;
 		
 		return stanDev;
+	}
+	
+	public Individual getParent(int tournamnetSize) {
+		int currentIndiv = rand.nextInt(this.numPop);
+		int bestFitIndiv = currentIndiv;
+		int bestFittess = knapsack.fitness(this.pop.get(currentIndiv));
+		
+		for(int i = 0; i < tournamnetSize; i++) {
+			currentIndiv = rand.nextInt(this.numPop);
+			int currentFittness = knapsack.fitness(this.pop.get(currentIndiv));
+			if(currentFittness > bestFittess) {
+				bestFittess = currentFittness;
+				bestFitIndiv = currentIndiv;
+			}
+		}
+		
+		return this.pop.get(bestFitIndiv);
+	}
+	
+	/*
+	 * @return Individual
+	 * 		returns the best fit individual in the population
+	 */
+	public Individual getBestFitIndiv() {
+		Individual bestFit = this.pop.get(0);
+		int bestFitness = this.knapsack.fitness(bestFit);
+		
+		for(int i = 1; i < this.numPop; i++) {
+			int currentFitness = this.knapsack.fitness(this.pop.get(i));
+			if(currentFitness > bestFitness) {
+				bestFitness = currentFitness;
+				bestFit = this.pop.get(i);
+			}
+		}
+		
+		return bestFit;
+	}
+	
+	/*
+	 * @param int 
+	 * 		The size of the tournament selection for getting the parents
+	 * @return Population
+	 * 		The new population that has been generated through crossover and
+	 * mutation. The best fit individual survives intact
+	 */
+	public Population generateNewPop(int tournamentSize) {
+		//Perform crossover 
+		Individual parent1 = getParent(tournamentSize);
+		Individual parent2 = getParent(tournamentSize);
+		
+		List<Individual> startNewPop = parent1.crossover(parent2);
+		
+		Population newPop = new Population(startNewPop, this.knapsack);
+		
+		for(int i = 0; i < (numPop-2)/2; i++) {
+			parent1 = getParent(tournamentSize);
+			parent2 = getParent(tournamentSize);
+			
+			List<Individual> newIndivids = parent1.crossover(parent2);
+			
+			newPop.addIndiv(newIndivids.get(0));
+			newPop.addIndiv(newIndivids.get(1));
+		}
+		
+		//Perform mutation
+		for(int i = 0; i < newPop.getNumPopulation(); i++) {
+			newPop.getPopulation().get(i).mutation();
+		}
+		
+		//add best fit individual
+		if(this.pop.size() % 2 == 1) {
+			newPop.addIndiv(getBestFitIndiv());
+		}
+		else if(this.pop.size() % 2 == 1) {
+			newPop.getPopulation().remove(newPop.getNumPopulation()-1);
+			newPop.addIndiv(getBestFitIndiv());
+		}
+		
+		return newPop;
 	}
 }
