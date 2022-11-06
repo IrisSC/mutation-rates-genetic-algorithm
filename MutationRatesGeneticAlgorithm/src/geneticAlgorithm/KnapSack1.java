@@ -1,14 +1,14 @@
 package geneticAlgorithm;
 
 public class KnapSack1 extends Knapsack{
-	
+	private int maxValue = 295;
 	/*
 	 * Knapsack1 constructor
 	 * sets the cap, weights, and values of this Knapsack Problem
 	 * will create 100 individuals for the population
 	 */
 	public KnapSack1() {
-		this.cap = 295;
+		this.cap = 269;
 		int[] weight = {95, 4, 60, 32, 23, 72, 80, 62, 65, 46};
 		this.weights = weight.clone();
 		int[] value = {55, 10, 47, 5, 4, 50, 8, 61, 85, 87};
@@ -30,6 +30,14 @@ public class KnapSack1 extends Knapsack{
 		this.values = value.clone();
 		
 		//create n individuals
+	}
+	
+	/*
+	 * @return int
+	 * 		the highest possible value a solution can hold
+	 */
+	public int getMaxPossibleValue() {
+		return this.maxValue;
 	}
 
 	/*

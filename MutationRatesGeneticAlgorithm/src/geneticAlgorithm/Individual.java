@@ -92,6 +92,8 @@ public abstract class Individual {
 	 */
 	public abstract Individual createRandomIndiv();
 	
+	public abstract Individual copy();
+	
 	/*
 	 * @returns the length of the solution
 	 */

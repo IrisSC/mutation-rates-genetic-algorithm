@@ -88,9 +88,9 @@ public class Population {
 	public int maxFitness() {
 		int maxFitness = 0;
 		
-		for(int i = 0; i < pop.size(); i++) {
-			Individual indiv = pop.get(i);
-			int fitness = knapsack.fitness(indiv);
+		for(int i = 0; i < this.pop.size(); i++) {
+			Individual indiv = this.pop.get(i);
+			int fitness = this.knapsack.fitness(indiv);
 			if(fitness > maxFitness) {
 				maxFitness = fitness; 
 			}
@@ -180,7 +180,7 @@ public class Population {
 			int currentFitness = this.knapsack.fitness(this.pop.get(i));
 			if(currentFitness > bestFitness) {
 				bestFitness = currentFitness;
-				bestFit = this.pop.get(i);
+				bestFit = this.pop.get(i).copy();
 			}
 		}
 		
@@ -198,6 +198,7 @@ public class Population {
 		//Perform crossover 
 		Individual parent1 = getParent(tournamentSize);
 		Individual parent2 = getParent(tournamentSize);
+		Individual bestFit = getBestFitIndiv().copy();
 		
 		List<Individual> startNewPop = parent1.crossover(parent2);
 		
@@ -217,15 +218,17 @@ public class Population {
 		for(int i = 0; i < newPop.getNumPopulation(); i++) {
 			newPop.getPopulation().get(i).mutation();
 		}
+		//System.out.println(this.knapsack.fitness(bestFit));
+		newPop.addIndiv(bestFit);
 		
 		//add best fit individual
-		if(this.pop.size() % 2 == 1) {
-			newPop.addIndiv(getBestFitIndiv());
+		/*if(this.pop.size() % 2 == 1) {
+			newPop.addIndiv(bestFit);
 		}
-		else if(this.pop.size() % 2 == 1) {
+		else if(this.pop.size() % 2 == 0) {
 			newPop.getPopulation().remove(newPop.getNumPopulation()-1);
 			newPop.addIndiv(getBestFitIndiv());
-		}
+		}*/
 		
 		return newPop;
 	}

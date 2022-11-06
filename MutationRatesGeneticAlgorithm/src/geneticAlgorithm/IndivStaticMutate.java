@@ -136,6 +136,12 @@ public class IndivStaticMutate extends Individual{
 		return indiv;
 	}
 	
+	@Override
+	public Individual copy() {
+		IndivStaticMutate copyIndiv = new IndivStaticMutate(this.solutionChromosome.clone(), this.staticMutationRate);
+		return copyIndiv;
+	}
+	
 	/*
 	 * Sets the static mutation rate
 	 */
