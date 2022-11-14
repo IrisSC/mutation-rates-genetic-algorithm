@@ -93,6 +93,11 @@ public abstract class Individual {
 	public abstract Individual createRandomIndiv();
 	
 	/*
+	 * creates a deep copy of an individual
+	 */
+	public abstract Individual copy();
+	
+	/*
 	 * @returns the length of the solution
 	 */
 	public int getLength() {

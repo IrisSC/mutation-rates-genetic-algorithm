@@ -106,7 +106,8 @@ class IndividualTests {
 		System.out.println(numOfGenesMutated);
 		System.out.println(testMutationRate);
 		
-		assertEquals("test mutation rate is close to actaul mutation rate", test4.getMutationRate(), 0.2, 0);
+		assertEquals("test mutation rate is close to actaul mutation rate", 
+				test4.getMutationRate(), 0.2, 0);
 	}
 	
 	/*

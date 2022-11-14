@@ -137,6 +137,18 @@ public class IndivStaticMutate extends Individual{
 	}
 	
 	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.Individual#copy()
+	 * @return Individual
+	 * 		a deep copy of an individual
+	 */
+	@Override
+	public Individual copy() {
+		IndivStaticMutate copyIndiv = new IndivStaticMutate(this.solutionChromosome.clone(), this.staticMutationRate);
+		return copyIndiv;
+	}
+	
+	/*
 	 * Sets the static mutation rate
 	 */
 	public void setMutationRate(double mutationRate) {
