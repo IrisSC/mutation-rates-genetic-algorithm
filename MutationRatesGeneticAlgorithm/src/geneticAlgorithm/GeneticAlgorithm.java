@@ -32,7 +32,7 @@ public class GeneticAlgorithm {
         List<Object[]> GATestData = new ArrayList<Object[]>();
 		
 		//create static mutation individual
-		IndivStaticMutate indiv1 = new IndivStaticMutate(10, 0.2);
+		IndivStaticMutate indiv1 = new IndivStaticMutate(10, 0.3);
 		
 		//create knapsack
 		KnapSack1 sack1 = new KnapSack1();
@@ -42,11 +42,14 @@ public class GeneticAlgorithm {
 		
 		GATestData.add(new Object[] {"Generation", "Max Fitness", "Min Fitness", "Avg Fitness"});
 		
+		GATestData.add(new Object[] {Integer.toString(0), Integer.toString(pop.maxFitness()), 
+				Integer.toString(pop.minFitness()), Double.toString(pop.avgFitness())});
+		
 		//run GA
 		for(int i = 0; i < 100; i++) {
 			pop = pop.generateNewPop(10);
 			
-			GATestData.add(new Object[] {Integer.toString(i), Integer.toString(pop.maxFitness()), 
+			GATestData.add(new Object[] {Integer.toString(i+1), Integer.toString(pop.maxFitness()), 
 					Integer.toString(pop.minFitness()), Double.toString(pop.avgFitness())});
 			
 			/*if(i%5 == 4) {

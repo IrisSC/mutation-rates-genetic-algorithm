@@ -92,6 +92,9 @@ public abstract class Individual {
 	 */
 	public abstract Individual createRandomIndiv();
 	
+	/*
+	 * creates a deep copy of an individual
+	 */
 	public abstract Individual copy();
 	
 	/*
