@@ -2,7 +2,7 @@ package geneticAlgorithm;
 
 public class Knapsack3 extends Knapsack{
 	/*
-	 * Knapsack2 constructor
+	 * Knapsack3 constructor
 	 * sets the cap, max values, weights, and values of this Knapsack Problem
 	 */
 	public Knapsack3() {

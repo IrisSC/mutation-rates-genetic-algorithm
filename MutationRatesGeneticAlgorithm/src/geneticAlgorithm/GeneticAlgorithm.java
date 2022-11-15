@@ -33,12 +33,13 @@ public class GeneticAlgorithm {
         List<Object[]> GATestData = new ArrayList<Object[]>();
 		
 		//create static mutation individual
-		IndivStaticMutate indiv1 = new IndivStaticMutate(50, 0.3);
+		IndivStaticMutate indiv1 = new IndivStaticMutate(80, 0.3);
 		
 		//create knapsack
 		//KnapSack1 sack1 = new KnapSack1();
 		//Knapsack2 sack1 = new Knapsack2();
-		Knapsack3 sack1 = new Knapsack3();
+		//Knapsack3 sack1 = new Knapsack3();
+		Knapsack4 sack1 = new Knapsack4();
 		
 		//create population
 		Population pop = new Population(11, indiv1, sack1);
