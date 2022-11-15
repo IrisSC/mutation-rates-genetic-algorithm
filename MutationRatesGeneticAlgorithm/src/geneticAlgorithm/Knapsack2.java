@@ -1,13 +1,13 @@
 package geneticAlgorithm;
 
 public class Knapsack2 extends Knapsack{
-	
 	/*
 	 * Knapsack1 constructor
-	 * sets the cap, weights, and values of this Knapsack Problem
+	 * sets the cap, max values, weights, and values of this Knapsack Problem
 	 */
 	public Knapsack2() {
 		this.cap = 878;
+		this.maxValue = 1024;
 		int[] weights = {92, 4, 43, 83, 84, 68, 92, 82, 6, 44, 32, 18, 56, 83, 25, 96, 70, 48,
 				14, 58};
 		this.weights = weights;
@@ -15,12 +15,4 @@ public class Knapsack2 extends Knapsack{
 				29, 75, 63};
 		this.values = values;
 	}
-
-	@Override
-	public int fitness(Individual in) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	
 }
