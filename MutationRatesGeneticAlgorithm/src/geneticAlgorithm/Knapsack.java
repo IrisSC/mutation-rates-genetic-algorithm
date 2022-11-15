@@ -2,6 +2,7 @@ package geneticAlgorithm;
 
 public abstract class Knapsack {
 	protected int cap;
+	protected int maxValue;
 	protected int[] values;
 	protected int[] weights;
 	
@@ -24,6 +25,14 @@ public abstract class Knapsack {
 	 */
 	public int[] getWeights() {
 		return this.weights;
+	}
+	
+	/*
+	 * @return int
+	 * 		the highest possible value a solution can hold
+	 */
+	public int getMaxPossibleValue() {
+		return this.maxValue;
 	}
 	
 	/*
@@ -53,6 +62,28 @@ public abstract class Knapsack {
 	/*
 	 * Each knapsack problem will have different weights and values
 	 */
-	public abstract int fitness(Individual in);
+	public int fitness(Individual in) {
+		if(weights.length != in.solutionChromosome.length) {
+			return -10;
+		}
+		//integers to hold the total weight and value of the individual
+		int totWeight = 0;
+		int totValue = 0;
+		
+		//iterate through each gene to get the value and weight
+		for(int i = 0; i < in.getSolutionChromosome().length; i++) {
+			int gene = in.getSolutionChromosome()[i];
+			if(gene == 1) {
+				totWeight = totWeight + this.weights[i];
+				totValue = totValue + this.values[i];
+			}
+		}
+		if(totWeight > this.cap) {
+			return 0;
+		}
+		else {
+			return totValue;
+		}
+	}
 	
 }
