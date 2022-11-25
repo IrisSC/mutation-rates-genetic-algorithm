@@ -60,9 +60,13 @@ public abstract class Knapsack {
 	}
 	
 	/*
-	 * Each knapsack problem will have different weights and values
+	 * @param Individual
+	 * 		This is the individual that whos fitness is being caluclated
+	 * @return int
+	 * 		The fitness value of the individual. If the Individual goes over the cap
+	 * the fitness value is zero
 	 */
-	public int fitness(Individual in) {
+	/*public int fitness(Individual in) {
 		if(weights.length != in.solutionChromosome.length) {
 			return -10;
 		}
@@ -85,5 +89,36 @@ public abstract class Knapsack {
 			return totValue;
 		}
 	}
+	*/
 	
+	/*
+	 * @param Individual
+	 * 		This is the individual that whos fitness is being caluclated
+	 * @return int
+	 * 		The fitness value of the individual. If the Individual goes over the cap
+	 * the fitness value is zero
+	 */
+	public int fitness(Individual in) {
+		if(weights.length != in.solutionChromosome.length) {
+			return -10;
+		}
+		//integers to hold the total weight and value of the individual
+		int totWeight = 0;
+		int totValue = 0;
+		
+		//iterate through each gene to get the value and weight
+		for(int i = 0; i < in.getSolutionChromosome().length; i++) {
+			int gene = in.getSolutionChromosome()[i];
+			if(gene == 1) {
+				totWeight = totWeight + this.weights[i];
+				totValue = totValue + this.values[i];
+			}
+		}
+		if(totWeight > this.cap) {
+			return totValue - (-10*(totWeight - this.cap));
+		}
+		else {
+			return totValue;
+		}
+	}
 }
