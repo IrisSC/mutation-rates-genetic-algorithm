@@ -254,9 +254,34 @@ class PopulationTests {
 		assertTrue("Individual 4 has been returned as a parent", s4);
 	}
 	
+	/*
+	 * tests the generate new population method
+	 */
 	@Test
 	void newPopulation() {
-		//not sure how to test
+		int[] solution1 = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
+		int[] solution2 = {0, 1, 0, 0, 1, 1, 0, 0, 0, 1};
+		int[] solution3 = {0, 1, 1, 1, 1, 0, 1, 0, 1, 0};
+		int[] solution4 = {0, 1, 0, 0, 0, 1, 0, 0, 1, 0};
+		
+		IndivStaticMutate indiv1 = new IndivStaticMutate(solution1, 0.2);
+		IndivStaticMutate indiv2 = new IndivStaticMutate(solution2, 0.2);
+		IndivStaticMutate indiv3 = new IndivStaticMutate(solution3, 0.2);
+		IndivStaticMutate indiv4 = new IndivStaticMutate(solution4, 0.2);
+		
+		List<Individual> indivList = new ArrayList<Individual>();
+		indivList.add(indiv1);
+		indivList.add(indiv2);
+		indivList.add(indiv3);
+		indivList.add(indiv4);
+		
+		KnapSack1 sack1 = new KnapSack1();
+		
+		Population pop = new Population(indivList, sack1);
+		
+		pop = pop.generateNewPop(2);
+		
+		assertEquals("indivNum is equal to 5", pop.getNumPopulation(), 5);
 	}
 	
 }
