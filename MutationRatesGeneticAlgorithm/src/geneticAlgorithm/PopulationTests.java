@@ -47,7 +47,30 @@ class PopulationTests {
 	
 	@Test
 	void knapsackSetter() {
-		//write test when there are more then one Knapsack problems encoded
+		IndivStaticMutate indiv1 = new IndivStaticMutate(10, 0.2);
+		IndivStaticMutate indiv2 = new IndivStaticMutate(10, 0.2);
+		IndivStaticMutate indiv3 = new IndivStaticMutate(10, 0.2);
+		IndivStaticMutate indiv4 = new IndivStaticMutate(10, 0.2);
+		
+		List<Individual> indivList = new ArrayList<Individual>();
+		indivList.add(indiv1);
+		indivList.add(indiv2);
+		indivList.add(indiv3);
+		indivList.add(indiv4);
+		
+		KnapSack1 sack1 = new KnapSack1();
+		
+		Population pop = new Population(indivList, sack1);
+		
+		//This is knapsack 1
+		assertEquals("check knapsack length is 10", pop.getKnapsack().weights.length, 10);
+		
+		Knapsack2 sack2 = new Knapsack2();
+		
+		pop.setKnapsack(sack2);
+		//This is knapsack 2
+		assertEquals("check knapsack length is 20", pop.getKnapsack().weights.length, 20);
+		
 	}
 	
 	@Test
