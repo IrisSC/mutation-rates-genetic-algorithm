@@ -16,6 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class GeneticAlgorithm {
+
 	public static void main(String[] args) throws IOException {
 		
 		//create stuff to print data into excel
@@ -32,10 +33,14 @@ public class GeneticAlgorithm {
         List<Object[]> GATestData = new ArrayList<Object[]>();
 		
 		//create static mutation individual
-		IndivStaticMutate indiv1 = new IndivStaticMutate(10, 0.3);
+		IndivStaticMutate indiv1 = new IndivStaticMutate(100, 0.3);
 		
 		//create knapsack
-		KnapSack1 sack1 = new KnapSack1();
+		//KnapSack1 sack1 = new KnapSack1();
+		//Knapsack2 sack1 = new Knapsack2();
+		//Knapsack3 sack1 = new Knapsack3();
+		//Knapsack4 sack1 = new Knapsack4();
+		Knapsack5 sack1 = new Knapsack5();
 		
 		//create population
 		Population pop = new Population(11, indiv1, sack1);
@@ -63,16 +68,10 @@ public class GeneticAlgorithm {
 		//print out information 
 		System.out.println(pop.maxFitness());
 		Individual bestFit = pop.getBestFitIndiv();
-		System.out.print(bestFit.getSolutionChromosome()[0]);
-		System.out.print(bestFit.getSolutionChromosome()[1]);
-		System.out.print(bestFit.getSolutionChromosome()[2]);
-		System.out.print(bestFit.getSolutionChromosome()[3]);
-		System.out.print(bestFit.getSolutionChromosome()[4]);
-		System.out.print(bestFit.getSolutionChromosome()[5]);
-		System.out.print(bestFit.getSolutionChromosome()[6]);
-		System.out.print(bestFit.getSolutionChromosome()[7]);
-		System.out.print(bestFit.getSolutionChromosome()[8]);
-		System.out.println(bestFit.getSolutionChromosome()[9]);
+		for(int i = 0; i < bestFit.length; i++) {
+			System.out.print(bestFit.getSolutionChromosome()[i]);
+		}
+		System.out.println("");
 		System.out.println("percent close: " + (double)pop.maxFitness()/(double)sack1.getMaxPossibleValue());
 		
 		//GATestData.put("22",new Object[] { Integer.toString(pop.maxFitness()), Integer.toString(pop.minFitness()), Double.toString(pop.avgFitness())});
