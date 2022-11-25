@@ -141,4 +141,26 @@ class IndividualTests {
 		assertEquals("gene at index 5 is 1", test8.getSolutionChromosome()[5], 1);
 		assertEquals("gene at index 9 is 1", test8.getSolutionChromosome()[9], 1);
 	}
+	
+	/*
+	 * Test copy Individual for static individual
+	 */
+	@Test
+	void staticCopy() {
+		//create solution for individual
+		int[] solution1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+		
+		//create the individuals
+		IndivStaticMutate originalIndiv = new IndivStaticMutate(solution1,  0.2);
+		
+		//copy individual
+		Individual copyIndiv = originalIndiv.copy();
+		
+		//change original individual solution chromosome
+		originalIndiv.getSolutionChromosome()[0] = 0;
+		
+		assertEquals("gene at index 0 is 0", originalIndiv.getSolutionChromosome()[0], 0);
+		assertEquals("gene at index 0 is 0", copyIndiv.getSolutionChromosome()[0], 1);
+		
+	}
 }
