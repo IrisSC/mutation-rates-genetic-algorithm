@@ -115,10 +115,11 @@ public abstract class Knapsack {
 			}
 		}
 		if(totWeight > this.cap) {
-			return totValue - (-10*(totWeight - this.cap));
+			return totValue - (10*(totWeight - this.cap));
 		}
 		else {
 			return totValue;
 		}
 	}
+	
 }
