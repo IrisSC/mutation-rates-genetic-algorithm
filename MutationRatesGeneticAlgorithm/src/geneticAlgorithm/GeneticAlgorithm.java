@@ -50,7 +50,8 @@ public class GeneticAlgorithm {
 		double[][] avg = new double[numGenerations][numRuns];
 		int[][] min = new int[numGenerations][numRuns];
 		
-		GATestData.add(new Object[] {"Generation", "Max Fitness", "Min Fitness", "Avg Fitness"});
+		GATestData.add(new Object[] {"Generation", "Max Fitness", "Min Fitness",
+				"Avg Fitness", "Max Stand Dev", "Avg Stand Dev"});
 		
 		//the number of runs for the GA
 		for(int j = 0; j < numRuns; j++) {
@@ -108,9 +109,24 @@ public class GeneticAlgorithm {
 				minTotal = minTotal + min[i][j];
 				avgTotal = avgTotal + avg[i][j];
 			}
+			double maxAvg = (double)(maxTotal)/(double)numRuns;
+			double avgAvg = (double)(avgTotal)/(double)numRuns;
+			//get standard deviations
+			double maxStandDev = 0.0;
+			double avgStandDev = 0.0;
+			for(int j = 0; j < numRuns; j++) {
+				int maxFitness = max[i][j];
+				maxStandDev = maxStandDev + Math.pow((double)maxFitness-maxAvg, 2);
+				
+				double avgFitness = avg[i][j];
+				avgStandDev = avgStandDev + Math.pow((double)avgFitness-avgAvg, 2);
+			}
+			maxStandDev = Math.round(Math.sqrt(maxStandDev/numRuns)*100.0)/100.0;
+			avgStandDev = Math.round(Math.sqrt(avgStandDev/numRuns)*100.0)/100.0;
 			
 			GATestData.add(new Object[] {Integer.toString(i), Double.toString((double)(maxTotal)/(double)numRuns), 
-					Double.toString((double)(minTotal)/(double)numRuns), Double.toString((double)(avgTotal)/(double)numRuns)});
+					Double.toString((double)(minTotal)/(double)numRuns), Double.toString((double)(avgTotal)/(double)numRuns),
+					Double.toString(maxStandDev), Double.toString(avgStandDev)});
 			
 		}
 		
