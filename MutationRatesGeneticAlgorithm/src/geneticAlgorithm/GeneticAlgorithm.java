@@ -19,7 +19,7 @@ public class GeneticAlgorithm {
 
 	public static void main(String[] args) throws IOException {
 		//setting sizes
-		int populationSize = 51;
+		int populationSize = 101;
 		int tournamentSize = 5;
 		int numGenerations = 100;
 		int numRuns = 100;
@@ -41,9 +41,9 @@ public class GeneticAlgorithm {
 		//create knapsack
 		//KnapSack1 sack1 = new KnapSack1();
 		//Knapsack2 sack1 = new Knapsack2();
-		Knapsack3 sack1 = new Knapsack3();
+		//Knapsack3 sack1 = new Knapsack3();
 		//Knapsack4 sack1 = new Knapsack4();
-		//Knapsack5 sack1 = new Knapsack5();
+		Knapsack5 sack1 = new Knapsack5();
 		
 		//create array to store the data from multiple runs
 		int[][] max = new int[numGenerations][numRuns];
@@ -51,7 +51,7 @@ public class GeneticAlgorithm {
 		int[][] min = new int[numGenerations][numRuns];
 		
 		GATestData.add(new Object[] {"Generation", "Max Fitness", "Min Fitness",
-				"Avg Fitness", "Max Stand Dev", "Avg Stand Dev"});
+				"Avg Fitness", "Max Stand Dev", "Avg Stand Dev", "Last Max"});
 		
 		//the number of runs for the GA
 		for(int j = 0; j < numRuns; j++) {
@@ -124,9 +124,11 @@ public class GeneticAlgorithm {
 			maxStandDev = Math.round(Math.sqrt(maxStandDev/numRuns)*100.0)/100.0;
 			avgStandDev = Math.round(Math.sqrt(avgStandDev/numRuns)*100.0)/100.0;
 			
+			int lastMax = max[i][numGenerations-1];
+			
 			GATestData.add(new Object[] {Integer.toString(i), Double.toString((double)(maxTotal)/(double)numRuns), 
 					Double.toString((double)(minTotal)/(double)numRuns), Double.toString((double)(avgTotal)/(double)numRuns),
-					Double.toString(maxStandDev), Double.toString(avgStandDev)});
+					Double.toString(maxStandDev), Double.toString(avgStandDev), Integer.toString(lastMax)});
 			
 		}
 		

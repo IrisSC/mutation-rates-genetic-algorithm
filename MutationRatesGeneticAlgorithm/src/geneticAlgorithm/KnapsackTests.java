@@ -159,4 +159,31 @@ class KnapsackTests {
 		
 		assertEquals("fitness value of indiv2 is 0", fitnessValue, 0);
 	}
+	
+	/*
+	 * Tests that the fitness function for Kapsack Problem 5 returns 0 when the 
+	 * cap is exceeded
+	 */
+	@Test
+	void Kapsack5FitnessMaxWeight() {
+		Knapsack3 sack4 = new Knapsack3();
+		
+		int[] solution = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+				1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+				1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+				1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+				1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+		IndivStaticMutate indiv2 = new IndivStaticMutate(solution, 0.2);
+		
+		int fitnessValue = sack4.fitness(indiv2);
+		
+		int[] weights = sack4.getWeights();
+		int totalWeight = 0;
+		for(int i = 0; i < weights.length; i++) {
+			totalWeight = weights[i] + totalWeight;
+		}
+		System.out.println(totalWeight);
+		
+		assertEquals("fitness value of indiv2 is 0", fitnessValue, 0);
+	}
 }
