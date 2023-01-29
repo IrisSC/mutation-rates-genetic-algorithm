@@ -22,7 +22,7 @@ public class GeneticAlgorithm {
 		int populationSize = 101;
 		int tournamentSize = 5;
 		int numGenerations = 100;
-		int numRuns = 100;
+		int numRuns = 1000;
 		
 		
 		//create stuff to print data into excel
@@ -52,7 +52,7 @@ public class GeneticAlgorithm {
 		
 		GATestData.add(new Object[] {"Generation", "Max Fitness", "Min Fitness",
 				"Avg Fitness", "Max Stand Dev", "Avg Stand Dev", "Last Max"});
-		
+		int numValid = 0;
 		//the number of runs for the GA
 		for(int j = 0; j < numRuns; j++) {
 			//create static mutation individual
@@ -64,6 +64,7 @@ public class GeneticAlgorithm {
 			/*GATestData.add(new Object[] {Integer.toString(0), Integer.toString(pop.maxFitness()), 
 					Integer.toString(pop.minFitness()), Double.toString(pop.avgFitness())});
 			*/
+			
 			max[0][j] = pop.maxFitness();
 			avg[0][j] = pop.avgFitness();
 			min[0][j] = pop.minFitness();
@@ -97,7 +98,12 @@ public class GeneticAlgorithm {
 			System.out.println("");
 			System.out.println("percent close: " + (double)pop.maxFitness()/(double)sack1.getMaxPossibleValue());
 			
+			System.out.println(sack1.isValid(bestFit));
+			if(sack1.isValid(bestFit)) {
+				numValid++;
+			}
 		}
+		System.out.print(numValid);
 		
 		//get the avgerages 
 		for(int i = 0; i < numGenerations; i++) {
@@ -124,7 +130,7 @@ public class GeneticAlgorithm {
 			maxStandDev = Math.round(Math.sqrt(maxStandDev/numRuns)*100.0)/100.0;
 			avgStandDev = Math.round(Math.sqrt(avgStandDev/numRuns)*100.0)/100.0;
 			
-			int lastMax = max[i][numGenerations-1];
+			int lastMax = max[i][numRuns-1];
 			
 			GATestData.add(new Object[] {Integer.toString(i), Double.toString((double)(maxTotal)/(double)numRuns), 
 					Double.toString((double)(minTotal)/(double)numRuns), Double.toString((double)(avgTotal)/(double)numRuns),

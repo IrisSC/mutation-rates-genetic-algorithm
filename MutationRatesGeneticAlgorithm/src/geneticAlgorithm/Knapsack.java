@@ -121,5 +121,29 @@ public abstract class Knapsack {
 			return totValue;
 		}
 	}
+	/*
+	 * @param Individual
+	 * 		The individual that we are checking is valid
+	 * @return boolean
+	 * 		true if the individual represents a valid solution, false if it does not
+	 */
+	public boolean isValid(Individual in) {
+		
+		int totWeight = 0;
+		
+		//adds the weight of all the items in the knapsack
+		for(int i = 0; i < in.getSolutionChromosome().length; i++) {
+			int gene = in.getSolutionChromosome()[i];
+			if(gene == 1) {
+				totWeight = totWeight + this.weights[i];
+			}
+			//if the weight is greater then the cap return false (not valid solution)
+			if(totWeight > this.cap) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 	
 }
