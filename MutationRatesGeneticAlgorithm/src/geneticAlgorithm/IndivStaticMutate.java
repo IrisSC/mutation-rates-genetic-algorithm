@@ -9,7 +9,7 @@ import java.util.Random;
 public class IndivStaticMutate extends Individual{
 	
 	//the static mutation rate 
-	private double staticMutationRate;
+	protected double staticMutationRate;
 	
 	/*
 	 * IndivStaticMutate constructor.
