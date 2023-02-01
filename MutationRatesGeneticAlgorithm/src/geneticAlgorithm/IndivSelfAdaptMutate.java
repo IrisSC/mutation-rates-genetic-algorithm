@@ -29,10 +29,8 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		
 		//mutate mutation rate
 		double mutateMutationRate = rand.nextDouble();
-		if(mutateMutationRate <= staticMutationRate/2) {
-			this.staticMutationRate = this.staticMutationRate + 0.01;
-		}else if(mutateMutationRate > staticMutationRate/2 && mutateMutationRate <= staticMutationRate) {
-			this.staticMutationRate = this.staticMutationRate - 0.01;
+		if(mutateMutationRate <= staticMutationRate) {
+			this.staticMutationRate = this.staticMutationRate + rand.nextGaussian()*0.01;
 		}
 	}
 	
