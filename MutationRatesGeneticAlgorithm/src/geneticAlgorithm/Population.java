@@ -92,7 +92,10 @@ public class Population {
 			Individual indiv = this.pop.get(i);
 			int fitness = this.knapsack.fitness(indiv);
 			if(fitness > maxFitness) {
-				maxFitness = fitness; 
+				//check to make sure individual is a valid solution
+				if(this.knapsack.isValid(indiv)) {
+					maxFitness = fitness; 
+				}
 			}
 		}
 		return maxFitness;
@@ -179,8 +182,11 @@ public class Population {
 		for(int i = 1; i < this.numPop; i++) {
 			int currentFitness = this.knapsack.fitness(this.pop.get(i));
 			if(currentFitness > bestFitness) {
-				bestFitness = currentFitness;
-				bestFit = this.pop.get(i).copy();
+				//check that the individual represetns a valid solution
+				if(this.knapsack.isValid(this.pop.get(i))) {
+					bestFitness = currentFitness;
+					bestFit = this.pop.get(i).copy();
+				}
 			}
 		}
 		
