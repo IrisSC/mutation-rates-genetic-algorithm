@@ -110,6 +110,25 @@ class IndividualTests {
 				test4.getMutationRate(), 0.2, 0);
 	}
 	
+	@Test
+	void selfAdaptingMutationMethod() {
+		//create new individual with self-adapting mutation rate
+		IndivSelfAdaptMutate test4 = new IndivSelfAdaptMutate(100, 0.2);
+		
+		boolean changedMutationRate = false;
+		
+		for(int i = 0; i < 1000; i++) {
+			double oldMutationRate = test4.getMutationRate();
+			test4.mutation();
+			
+			if(test4.getMutationRate() != oldMutationRate) {
+				changedMutationRate = true;
+			}
+		}
+		
+		assertTrue("test that mutation rate changes", changedMutationRate);
+	}
+	
 	/*
 	 * Tests the crossover function for the static individual
 	 */
