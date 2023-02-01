@@ -8,8 +8,6 @@ public abstract class Individual {
 	protected int length;
 	//this array represents a solution to the problem
 	protected int[] solutionChromosome;
-	//this boolean records whether an individual is a valid solution
-	protected boolean valid;
 	//create random object
 	protected static Random rand = new Random();
 	
@@ -111,11 +109,5 @@ public abstract class Individual {
 	 */
 	public int[] getSolutionChromosome() {
 		return this.solutionChromosome;
-	}
-	/*
-	 * @returns whether an individual is a valid solution
-	 */
-	public boolean getValid() {
-		return this.valid;
 	}
 }
