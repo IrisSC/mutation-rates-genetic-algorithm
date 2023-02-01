@@ -22,7 +22,7 @@ public class GeneticAlgorithm {
 		int populationSize = 101;
 		int tournamentSize = 5;
 		int numGenerations = 100;
-		int numRuns = 1000;
+		int numRuns = 100;
 		
 		
 		//create stuff to print data into excel
@@ -56,7 +56,8 @@ public class GeneticAlgorithm {
 		//the number of runs for the GA
 		for(int j = 0; j < numRuns; j++) {
 			//create static mutation individual
-			IndivStaticMutate indiv1 = new IndivStaticMutate(sack1.weights.length, 0.2);
+			//IndivStaticMutate indiv1 = new IndivStaticMutate(sack1.weights.length, 0.2);
+			IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(sack1.weights.length, 0.2);
 			
 			//create population
 			Population pop = new Population(populationSize, indiv1, sack1);
