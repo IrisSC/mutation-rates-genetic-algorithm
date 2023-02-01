@@ -52,8 +52,8 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 			newSolution2[j] = this.solutionChromosome[j];
 		}
 		
-		IndivStaticMutate indiv1 = new IndivStaticMutate(newSolution1, this.staticMutationRate);
-		IndivStaticMutate indiv2 = new IndivStaticMutate(newSolution2, in.staticMutationRate);
+		IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(newSolution1, this.staticMutationRate);
+		IndivSelfAdaptMutate indiv2 = new IndivSelfAdaptMutate(newSolution2, in.staticMutationRate);
 		newSolution.add(indiv1);
 		newSolution.add(indiv2);
 		
