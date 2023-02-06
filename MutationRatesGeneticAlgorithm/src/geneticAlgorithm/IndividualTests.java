@@ -111,6 +111,29 @@ class IndividualTests {
 	}
 	
 	/*
+	 * Tests that the mutation rate does change when the self-adapting mutation
+	 * 	individual is mutated 1000 times
+	 */
+	@Test
+	void selfAdaptingMutationMethod() {
+		//create new individual with self-adapting mutation rate
+		IndivSelfAdaptMutate test4 = new IndivSelfAdaptMutate(100, 0.2);
+		
+		boolean changedMutationRate = false;
+		
+		for(int i = 0; i < 1000; i++) {
+			double oldMutationRate = test4.getMutationRate();
+			test4.mutation();
+			
+			if(test4.getMutationRate() != oldMutationRate) {
+				changedMutationRate = true;
+			}
+		}
+		
+		assertTrue("test that mutation rate changes", changedMutationRate);
+	}
+	
+	/*
 	 * Tests the crossover function for the static individual
 	 */
 	@Test
@@ -140,6 +163,39 @@ class IndividualTests {
 		assertEquals("gene at index 3 is 0", test8.getSolutionChromosome()[3], 0);
 		assertEquals("gene at index 5 is 1", test8.getSolutionChromosome()[5], 1);
 		assertEquals("gene at index 9 is 1", test8.getSolutionChromosome()[9], 1);
+	}
+	
+	@Test
+	void selfAdaptiveCrossoverMethod() {
+		//create solutions for the parent individuals
+		int[] solution1 = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+		int[] solution2 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		//create the parent individuals
+		IndivSelfAdaptMutate test9 = new IndivSelfAdaptMutate(solution1,  0.4);
+		IndivSelfAdaptMutate test10 = new IndivSelfAdaptMutate(solution2,  0.3);
+		
+		//crossover the parent individual
+		List<Individual> crossoverIndivs = test9.crossover(test10);
+		
+		//get the two children individuals
+		IndivSelfAdaptMutate test7 = (IndivSelfAdaptMutate) crossoverIndivs.get(0);
+		IndivSelfAdaptMutate test8 = (IndivSelfAdaptMutate) crossoverIndivs.get(1);
+		
+		//test child one crossover point
+		assertEquals("gene at index 0 is 1", test7.getSolutionChromosome()[0], 1);
+		assertEquals("gene at index 3 is 1", test7.getSolutionChromosome()[3], 1);
+		assertEquals("gene at index 5 is 0", test7.getSolutionChromosome()[5], 0);
+		assertEquals("gene at index 9 is 0", test7.getSolutionChromosome()[9], 0);
+		
+		//test child two crossover point
+		assertEquals("gene at index 0 is 0", test8.getSolutionChromosome()[0], 0);
+		assertEquals("gene at index 3 is 0", test8.getSolutionChromosome()[3], 0);
+		assertEquals("gene at index 5 is 1", test8.getSolutionChromosome()[5], 1);
+		assertEquals("gene at index 9 is 1", test8.getSolutionChromosome()[9], 1);
+		
+		//test that the mutation rates crossed over
+		assertEquals("child1 has parent1s mutation rate", test7.getMutationRate(), 0.4, 0);
+		assertEquals("child2 has parent2s mutation rate", test8.getMutationRate(), 0.3, 0);
 	}
 	
 	/*

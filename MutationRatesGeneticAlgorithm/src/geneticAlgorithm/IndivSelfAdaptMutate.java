@@ -29,10 +29,8 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		
 		//mutate mutation rate
 		double mutateMutationRate = rand.nextDouble();
-		if(mutateMutationRate <= staticMutationRate/2) {
-			this.staticMutationRate = this.staticMutationRate + 0.01;
-		}else if(mutateMutationRate > staticMutationRate/2 && mutateMutationRate <= staticMutationRate) {
-			this.staticMutationRate = this.staticMutationRate - 0.01;
+		if(mutateMutationRate <= staticMutationRate) {
+			this.staticMutationRate = this.staticMutationRate + rand.nextGaussian()*0.01;
 		}
 	}
 	
@@ -54,8 +52,8 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 			newSolution2[j] = this.solutionChromosome[j];
 		}
 		
-		IndivStaticMutate indiv1 = new IndivStaticMutate(newSolution1, this.staticMutationRate);
-		IndivStaticMutate indiv2 = new IndivStaticMutate(newSolution2, in.staticMutationRate);
+		IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(newSolution1, this.staticMutationRate);
+		IndivSelfAdaptMutate indiv2 = new IndivSelfAdaptMutate(newSolution2, in.staticMutationRate);
 		newSolution.add(indiv1);
 		newSolution.add(indiv2);
 		
