@@ -3,8 +3,8 @@ package geneticAlgorithm;
 public class Knapsack7 extends Knapsack{
 
 	public Knapsack7() {
-		this.cap = 978;
-		this.maxValue = 4219;
+		this.cap = 1228;
+		this.maxValue = 3830;
 		int [] weights = {64, 97, 61, 52, 13, 94, 8, 88, 19, 16, 88, 32, 67, 58, 55, 17,
 				28, 43, 11, 10, 61, 58, 54, 84, 92, 82, 68, 95, 16, 10};
 		this.weights = weights;
