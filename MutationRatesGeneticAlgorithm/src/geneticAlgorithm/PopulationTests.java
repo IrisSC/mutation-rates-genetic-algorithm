@@ -74,6 +74,38 @@ class PopulationTests {
 	}
 	
 	@Test
+	void knapsackFitnessChanges() {
+		int[] solution0 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+		
+		int[] solution1 = {1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 
+				0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 
+				0, 1, 1, 0, 0, 0, 1, 0, 1, 0};
+		
+		IndivSelfAdaptMutate indiv0 = new IndivSelfAdaptMutate(solution0, 0.2);
+		IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(solution1, 0.2);
+		
+		Knapsack6 sack6 = new Knapsack6();
+		Knapsack7 sack7 = new Knapsack7();
+		
+		Population pop0 = new Population(1, indiv0, sack6);
+		Population pop1 = new Population(1, indiv1, sack7);
+		
+		//int fitness = sack6.fitness(indiv1);
+		//assertEquals("indiv1 fitness is 0 with sack 6", fitness, 0);
+		
+		assertEquals("max fitness is 17 for knapsack 6", pop0.maxFitness(), 17);
+		assertEquals("max fitness is -- for knapsack 7", pop1.maxFitness(), 2737);
+		
+		pop0.setKnapsack(sack7);
+		pop1.setKnapsack(sack6);
+		
+		assertEquals("max fitness is 29 for knapsack 7", pop0.maxFitness(), 29);
+		assertEquals("max fitness is 0 for knapsack 6", pop1.maxFitness(), 0);
+	}
+	
+	@Test
 	void minFitnessValue() {
 		int[] solution1 = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
 		int[] solution2 = {0, 1, 0, 0, 1, 1, 0, 0, 0, 1};
