@@ -158,6 +158,22 @@ public class Population {
 		return stanDev;
 	}
 	
+	/*
+	 * @return double
+	 * 		This method returns the average mutation rate of population
+	 */
+	public double avgMutationRate() {
+		double totalMutationRate = 0.0;
+		
+		for(int i=0; i < this.pop.size(); i++) {
+			Individual indiv = pop.get(i);
+			double mutationRate = indiv.getMutationRate();
+			totalMutationRate = totalMutationRate + mutationRate;
+		}
+		
+		return totalMutationRate/(double)this.pop.size();
+	}
+	
 	public Individual getParent(int tournamnetSize) {
 		int currentIndiv = rand.nextInt(this.numPop);
 		int bestFitIndiv = currentIndiv;

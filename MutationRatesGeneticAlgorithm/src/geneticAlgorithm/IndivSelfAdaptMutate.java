@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IndivSelfAdaptMutate extends IndivStaticMutate{
+	
+	protected double mutateRate;
 
 	public IndivSelfAdaptMutate(int solutionLength, double mutationRate) {
 		super(solutionLength, mutationRate);
+		
+		mutateRate = 0.5;
 	}
 	
 	public IndivSelfAdaptMutate(int[] solution, double mutationRate) {
 		super(solution, mutationRate);
+		
+		mutateRate = 0.5;
 	}
 	
 	public void mutation() {
@@ -29,7 +35,7 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		
 		//mutate mutation rate
 		double mutateMutationRate = rand.nextDouble();
-		if(mutateMutationRate <= staticMutationRate) {
+		if(mutateMutationRate <= this.mutateRate) {
 			double mutate = rand.nextGaussian()*0.01;
 			if(this.staticMutationRate + mutate >= 0) {
 				this.staticMutationRate = this.staticMutationRate + mutate;

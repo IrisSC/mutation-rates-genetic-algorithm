@@ -98,6 +98,11 @@ public abstract class Individual {
 	public abstract Individual copy();
 	
 	/*
+	 * @return the mutation rate
+	 */
+	public abstract double getMutationRate();
+	
+	/*
 	 * @returns the length of the solution
 	 */
 	public int getLength() {

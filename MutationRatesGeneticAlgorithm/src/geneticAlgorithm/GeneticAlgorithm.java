@@ -57,7 +57,7 @@ public class GeneticAlgorithm {
 		for(int j = 0; j < numRuns; j++) {
 			//create static mutation individual
 			//IndivStaticMutate indiv1 = new IndivStaticMutate(sack1.weights.length, 0.2);
-			IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(sack1.weights.length, 0.2);
+			IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(sack1.weights.length, 0.3);
 			
 			//create population
 			Population pop = new Population(populationSize, indiv1, sack1);
