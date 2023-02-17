@@ -30,7 +30,13 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		//mutate mutation rate
 		double mutateMutationRate = rand.nextDouble();
 		if(mutateMutationRate <= staticMutationRate) {
-			this.staticMutationRate = this.staticMutationRate + rand.nextGaussian()*0.01;
+			double mutate = rand.nextGaussian()*0.01;
+			if(this.staticMutationRate + mutate >= 0) {
+				this.staticMutationRate = this.staticMutationRate + mutate;
+			}
+			else {
+				this.staticMutationRate = 0.0;
+			}
 		}
 	}
 	
