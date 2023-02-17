@@ -30,7 +30,13 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		//mutate mutation rate
 		double mutateMutationRate = rand.nextDouble();
 		if(mutateMutationRate <= staticMutationRate) {
-			this.staticMutationRate = this.staticMutationRate + rand.nextGaussian()*0.01;
+			double mutate = rand.nextGaussian()*0.01;
+			if(this.staticMutationRate + mutate >= 0) {
+				this.staticMutationRate = this.staticMutationRate + mutate;
+			}
+			else {
+				this.staticMutationRate = 0.0;
+			}
 		}
 	}
 	
@@ -60,11 +66,15 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		return newSolution;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.IndivStaticMutate#createRandomIndiv()
+	 * return Individual
+	 * 		a randomly generated slef adpating mutation rate individual
+	 */
 	public Individual createRandomIndiv() {
-		double mutationRate = this.rand.nextDouble();
-		
 		//create new individual
-		IndivSelfAdaptMutate indiv = new IndivSelfAdaptMutate(this.length, mutationRate);
+		IndivSelfAdaptMutate indiv = new IndivSelfAdaptMutate(this.length, this.staticMutationRate);
 				
 		return indiv;
 	}
