@@ -60,11 +60,15 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		return newSolution;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.IndivStaticMutate#createRandomIndiv()
+	 * return Individual
+	 * 		a randomly generated slef adpating mutation rate individual
+	 */
 	public Individual createRandomIndiv() {
-		double mutationRate = this.rand.nextDouble();
-		
 		//create new individual
-		IndivSelfAdaptMutate indiv = new IndivSelfAdaptMutate(this.length, mutationRate);
+		IndivSelfAdaptMutate indiv = new IndivSelfAdaptMutate(this.length, this.staticMutationRate);
 				
 		return indiv;
 	}
