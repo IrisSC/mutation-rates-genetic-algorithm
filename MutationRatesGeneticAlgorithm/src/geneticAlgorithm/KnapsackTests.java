@@ -105,7 +105,7 @@ class KnapsackTests {
 	}
 	
 	/*
-	 * Tests that the cap, weights and values are correct for Knapsack Problem 4
+	 * Tests that the cap, weights and values are correct for Knapsack Problem 5
 	 */
 	@Test
 	void createKnapsack5() {
@@ -147,6 +147,8 @@ class KnapsackTests {
 	/*
 	 * Tests that the fitness function for Kapsack Problem 1 returns 0 when the 
 	 * cap is exceeded
+	 * 
+	 * This test will only pass if the original fitness function is being used
 	 */
 	@Test
 	void Kapsack1FitnessMaxWeight() {
@@ -161,12 +163,14 @@ class KnapsackTests {
 	}
 	
 	/*
-	 * Tests that the fitness function for Kapsack Problem 5 returns 0 when the 
-	 * cap is exceeded
+	 * Tests that the fitness function for Kapsack Problem 5 returns -10 when the 
+	 * cap is exceeded (and all items are in the knapsack)
+	 * 
+	 * This test only passes when the new fitness function is used
 	 */
 	@Test
 	void Kapsack5FitnessMaxWeight() {
-		Knapsack3 sack4 = new Knapsack3();
+		Knapsack5 sack4 = new Knapsack5();
 		
 		int[] solution = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 				1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -184,6 +188,6 @@ class KnapsackTests {
 		}
 		System.out.println(totalWeight);
 		
-		assertEquals("fitness value of indiv2 is 0", fitnessValue, 0);
+		assertEquals("fitness value of indiv2 is 0", fitnessValue, -10);
 	}
 }
