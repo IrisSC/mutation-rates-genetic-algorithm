@@ -71,7 +71,7 @@ public class IndivStaticMutate extends Individual{
 	 */
 	@Override
 	public void mutation() {
-		
+		System.out.print(" " + 1);
 		//goes through every gene in the solution
 		for(int i=0; i < solutionChromosome.length; i++) {
 			double mutate = rand.nextDouble();
@@ -160,5 +160,10 @@ public class IndivStaticMutate extends Individual{
 	 */
 	public double getMutationRate() {
 		return this.staticMutationRate;
+	}
+	
+	@Override
+	public String getType() {
+		return "Static";
 	}
 }

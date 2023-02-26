@@ -19,7 +19,9 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		mutateRate = 0.5;
 	}
 	
+	@Override
 	public void mutation() {
+		System.out.print(" " + 2);
 		//goes through every gene in the solution
 		for(int i=0; i < solutionChromosome.length; i++) {
 			double mutate = rand.nextDouble();
@@ -36,17 +38,17 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		//mutate mutation rate
 		double mutateMutationRate = rand.nextDouble();
 		if(mutateMutationRate <= this.mutateRate) {
-			double mutate = rand.nextGaussian()*0.01;
-			if(this.staticMutationRate + mutate >= 0) {
-				this.staticMutationRate = this.staticMutationRate + mutate;
-			}
-			else {
+			double mutate = rand.nextGaussian()*0.1;
+			if(this.staticMutationRate + mutate < 0) {
 				this.staticMutationRate = 0.0;
+			}else {
+				this.staticMutationRate = this.staticMutationRate + mutate;
 			}
 		}
 	}
 	
-	public List<Individual> crossover(IndivSelfAdaptMutate in){
+	@Override
+	public List<Individual> crossover(Individual in){
 		//Random rand = new Random();
 		int crossoverpoint = (int)this.length/2;
 		
@@ -65,7 +67,7 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		}
 		
 		IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(newSolution1, this.staticMutationRate);
-		IndivSelfAdaptMutate indiv2 = new IndivSelfAdaptMutate(newSolution2, in.staticMutationRate);
+		IndivSelfAdaptMutate indiv2 = new IndivSelfAdaptMutate(newSolution2, this.staticMutationRate);
 		newSolution.add(indiv1);
 		newSolution.add(indiv2);
 		
@@ -79,9 +81,28 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 	 * 		a randomly generated slef adpating mutation rate individual
 	 */
 	public Individual createRandomIndiv() {
+		double mutationRate = rand.nextDouble();
+		
 		//create new individual
 		IndivSelfAdaptMutate indiv = new IndivSelfAdaptMutate(this.length, this.staticMutationRate);
 				
 		return indiv;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.Individual#copy()
+	 * @return Individual
+	 * 		a deep copy of an individual
+	 */
+	@Override
+	public Individual copy() {
+		IndivSelfAdaptMutate copyIndiv = new IndivSelfAdaptMutate(this.solutionChromosome.clone(), this.staticMutationRate);
+		return copyIndiv;
+	}
+	
+	@Override
+	public String getType() {
+		return "Self-Adaptive";
 	}
 }

@@ -102,6 +102,8 @@ public abstract class Individual {
 	 */
 	public abstract double getMutationRate();
 	
+	public abstract String getType();
+	
 	/*
 	 * @returns the length of the solution
 	 */
