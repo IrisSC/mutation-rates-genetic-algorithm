@@ -84,6 +84,15 @@ public class Population {
 		this.numPop = this.numPop + 1;
 	}
 	
+	/*
+	 * This method removes an individual to the population. And decreases the population
+	 * size by one
+	 */
+	public void removeIndiv(int index) {
+		this.pop.remove(index);
+		this.numPop = this.numPop - 1;
+	}
+	
 	/* 
 	 * @return int
 	 * 		This function returns the max fitness of the population
@@ -254,17 +263,15 @@ public class Population {
 		for(int i = 0; i < newPop.getNumPopulation(); i++) {
 			newPop.getPopulation().get(i).mutation();
 		}
-		//System.out.println(this.knapsack.fitness(bestFit));
-		newPop.addIndiv(bestFit);
 		
 		//add best fit individual
-		/*if(this.pop.size() % 2 == 1) {
+		if(this.pop.size() % 2 == 1) {
 			newPop.addIndiv(bestFit);
 		}
 		else if(this.pop.size() % 2 == 0) {
-			newPop.getPopulation().remove(newPop.getNumPopulation()-1);
+			newPop.removeIndiv(newPop.getNumPopulation()-1);
 			newPop.addIndiv(getBestFitIndiv());
-		}*/
+		}
 		
 		return newPop;
 	}

@@ -19,7 +19,7 @@ public class GeneticAlgorithm {
 
 	public static void main(String[] args) throws IOException {
 		//setting sizes
-		int populationSize = 101;
+		int populationSize = 100;
 		int tournamentSize = 5;
 		int numGenerations = 300;
 		int numRuns = 10;
