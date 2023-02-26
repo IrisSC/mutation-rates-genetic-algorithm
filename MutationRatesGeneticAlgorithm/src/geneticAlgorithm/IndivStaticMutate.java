@@ -8,9 +8,6 @@ import java.util.Random;
 
 public class IndivStaticMutate extends Individual{
 	
-	//the static mutation rate 
-	protected double staticMutationRate;
-	
 	/*
 	 * IndivStaticMutate constructor.
 	 * takes in solutionLength and mutationRate
@@ -21,7 +18,7 @@ public class IndivStaticMutate extends Individual{
 		super(solutionLength);
 		
 		//set mutation rate
-		this.staticMutationRate = mutationRate;
+		this.mutationRate = mutationRate;
 	}
 	
 	/*
@@ -34,7 +31,7 @@ public class IndivStaticMutate extends Individual{
 		super(solution);
 		
 		//set mutation rate
-		this.staticMutationRate = mutationRate;
+		this.mutationRate = mutationRate;
 	}
 	
 	/*
@@ -76,7 +73,7 @@ public class IndivStaticMutate extends Individual{
 		for(int i=0; i < solutionChromosome.length; i++) {
 			double mutate = rand.nextDouble();
 			//if random double is less then the static mutation rate then mutate
-			if(mutate <= staticMutationRate) {
+			if(mutate <= mutationRate) {
 				if(solutionChromosome[i] == 1) {
 					solutionChromosome[i] = 0;
 				}else {
@@ -92,8 +89,8 @@ public class IndivStaticMutate extends Individual{
 	 * 
 	 * @param Individual in
 	 * 		the individual that this individual is being crossed over with
-	 * @returns int[]
-	 * 		returns the new solution created from crossover
+	 * @returns List<Individual>
+	 * 		returns the new solutions created from crossover
 	 */
 	@Override
 	public List<Individual> crossover(Individual in){
@@ -114,8 +111,8 @@ public class IndivStaticMutate extends Individual{
 			newSolution2[j] = this.solutionChromosome[j];
 		}
 		
-		IndivStaticMutate indiv1 = new IndivStaticMutate(newSolution1, this.staticMutationRate);
-		IndivStaticMutate indiv2 = new IndivStaticMutate(newSolution2, this.staticMutationRate);
+		IndivStaticMutate indiv1 = new IndivStaticMutate(newSolution1, this.mutationRate);
+		IndivStaticMutate indiv2 = new IndivStaticMutate(newSolution2, this.mutationRate);
 		newSolution.add(indiv1);
 		newSolution.add(indiv2);
 		
@@ -131,7 +128,7 @@ public class IndivStaticMutate extends Individual{
 	 */
 	public Individual createRandomIndiv() {
 		//create new individual
-		IndivStaticMutate indiv = new IndivStaticMutate(this.length, this.staticMutationRate);
+		IndivStaticMutate indiv = new IndivStaticMutate(this.length, this.mutationRate);
 		
 		return indiv;
 	}
@@ -144,24 +141,30 @@ public class IndivStaticMutate extends Individual{
 	 */
 	@Override
 	public Individual copy() {
-		IndivStaticMutate copyIndiv = new IndivStaticMutate(this.solutionChromosome.clone(), this.staticMutationRate);
+		IndivStaticMutate copyIndiv = new IndivStaticMutate(this.solutionChromosome.clone(), this.mutationRate);
 		return copyIndiv;
 	}
 	
 	/*
-	 * Sets the static mutation rate
+	 * Sets the mutation rate
 	 */
 	public void setMutationRate(double mutationRate) {
-		this.staticMutationRate = mutationRate;
+		this.mutationRate = mutationRate;
 	}
 	
 	/*
-	 * returns that static mutation rate
+	 * returns that mutation rate
 	 */
 	public double getMutationRate() {
-		return this.staticMutationRate;
+		return this.mutationRate;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.Individual#getType()
+	 * @returns String
+	 * 		returns the String "Static" since this is the static mutation rate
+	 */
 	@Override
 	public String getType() {
 		return "Static";

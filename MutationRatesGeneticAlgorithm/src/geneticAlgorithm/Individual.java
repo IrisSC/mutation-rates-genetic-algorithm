@@ -8,6 +8,8 @@ public abstract class Individual {
 	protected int length;
 	//this array represents a solution to the problem
 	protected int[] solutionChromosome;
+	//the mutation rate  (used by the static & self-adaptive Individuals)
+	protected double mutationRate;
 	//create random object
 	protected static Random rand = new Random();
 	
@@ -102,6 +104,10 @@ public abstract class Individual {
 	 */
 	public abstract double getMutationRate();
 	
+	/*
+	 * @return String
+	 * 		the name of the type of Individual that the solution is
+	 */
 	public abstract String getType();
 	
 	/*
