@@ -39,7 +39,7 @@ public class GeneticAlgorithm {
         List<Object[]> GATestData = new ArrayList<Object[]>();
 		
 		//create knapsack
-		//KnapSack1 sack1 = new KnapSack1();
+		//Knapsack1 sack1 = new Knapsack1();
 		//Knapsack2 sack1 = new Knapsack2();
 		//Knapsack3 sack1 = new Knapsack3();
 		//Knapsack4 sack1 = new Knapsack4();

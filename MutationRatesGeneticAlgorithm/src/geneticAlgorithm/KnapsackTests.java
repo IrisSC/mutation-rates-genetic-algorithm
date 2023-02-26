@@ -13,7 +13,7 @@ class KnapsackTests {
 	 */
 	@Test
 	void createKnapsack1() {
-		KnapSack1 sack1 = new KnapSack1();
+		Knapsack1 sack1 = new Knapsack1();
 		
 		assertEquals("cap is 269", sack1.getCap(), 269);
 		assertEquals("weights is length 10", sack1.getWeights().length, 10);
@@ -134,7 +134,7 @@ class KnapsackTests {
 	 */
 	@Test
 	void Knapsack1Fitness() {
-		KnapSack1 sack2 = new KnapSack1();
+		Knapsack1 sack2 = new Knapsack1();
 		
 		int[] solution = {0, 0, 0, 0, 0, 1, 0, 0, 0, 1};
 		IndivStaticMutate indiv1 = new IndivStaticMutate(solution, 0.2);
@@ -150,7 +150,7 @@ class KnapsackTests {
 	 */
 	@Test
 	void Kapsack1FitnessMaxWeight() {
-		KnapSack1 sack3 = new KnapSack1();
+		Knapsack1 sack3 = new Knapsack1();
 		
 		int[] solution = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 		IndivStaticMutate indiv2 = new IndivStaticMutate(solution, 0.2);

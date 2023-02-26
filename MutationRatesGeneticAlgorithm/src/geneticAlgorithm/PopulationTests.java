@@ -14,7 +14,7 @@ class PopulationTests {
 	@Test
 	void constructor1() {
 		IndivStaticMutate indiv1 = new IndivStaticMutate(10, 0.2);
-		KnapSack1 sack1 = new KnapSack1();
+		Knapsack1 sack1 = new Knapsack1();
 		
 		Population pop1 = new Population(50, indiv1, sack1);
 		
@@ -36,7 +36,7 @@ class PopulationTests {
 		indivList.add(indiv3);
 		indivList.add(indiv4);
 		
-		KnapSack1 sack1 = new KnapSack1();
+		Knapsack1 sack1 = new Knapsack1();
 		
 		Population pop = new Population(indivList, sack1);
 		
@@ -58,7 +58,7 @@ class PopulationTests {
 		indivList.add(indiv3);
 		indivList.add(indiv4);
 		
-		KnapSack1 sack1 = new KnapSack1();
+		Knapsack1 sack1 = new Knapsack1();
 		
 		Population pop = new Population(indivList, sack1);
 		
@@ -123,7 +123,7 @@ class PopulationTests {
 		indivList.add(indiv3);
 		indivList.add(indiv4);
 		
-		KnapSack1 sack1 = new KnapSack1();
+		Knapsack1 sack1 = new Knapsack1();
 		
 		Population pop = new Population(indivList, sack1);
 		
@@ -148,7 +148,7 @@ class PopulationTests {
 		indivList.add(indiv3);
 		indivList.add(indiv4);
 		
-		KnapSack1 sack1 = new KnapSack1();
+		Knapsack1 sack1 = new Knapsack1();
 		
 		Population pop = new Population(indivList, sack1);
 		
@@ -173,7 +173,7 @@ class PopulationTests {
 		indivList.add(indiv3);
 		indivList.add(indiv4);
 		
-		KnapSack1 sack1 = new KnapSack1();
+		Knapsack1 sack1 = new Knapsack1();
 		
 		Population pop = new Population(indivList, sack1);
 		
@@ -198,7 +198,7 @@ class PopulationTests {
 		indivList.add(indiv3);
 		indivList.add(indiv4);
 		
-		KnapSack1 sack1 = new KnapSack1();
+		Knapsack1 sack1 = new Knapsack1();
 		
 		Population pop = new Population(indivList, sack1);
 		
@@ -223,7 +223,7 @@ class PopulationTests {
 		indivList.add(indiv3);
 		indivList.add(indiv4);
 		
-		KnapSack1 sack1 = new KnapSack1();
+		Knapsack1 sack1 = new Knapsack1();
 		
 		Population pop = new Population(indivList, sack1);
 		
@@ -259,7 +259,7 @@ class PopulationTests {
 		indivList.add(indiv3);
 		indivList.add(indiv4);
 		
-		KnapSack1 sack1 = new KnapSack1();
+		Knapsack1 sack1 = new Knapsack1();
 		
 		Population pop = new Population(indivList, sack1);
 		
@@ -307,7 +307,7 @@ class PopulationTests {
 		indivList.add(indiv3);
 		indivList.add(indiv4);
 		
-		KnapSack1 sack1 = new KnapSack1();
+		Knapsack1 sack1 = new Knapsack1();
 		
 		Population pop = new Population(indivList, sack1);
 		
