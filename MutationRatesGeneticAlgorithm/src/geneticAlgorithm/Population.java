@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Population {
+	//List of all the individuals in the population
 	List<Individual> pop = new ArrayList<Individual>();
+	//number of individuals in the population
 	int numPop;
+	//knapsack that the fitness if passed off of
 	Knapsack knapsack;
 	//create random object
 	protected static Random rand = new Random();
@@ -174,6 +177,13 @@ public class Population {
 		return totalMutationRate/(double)this.pop.size();
 	}
 	
+	/*
+	 * @param int
+	 * 		the size of the tournament
+	 * @return Individual
+	 * 		The best fit individual that was selected for the tournament. This will
+	 * be used as a parent individual
+	 */
 	public Individual getParent(int tournamnetSize) {
 		int currentIndiv = rand.nextInt(this.numPop);
 		int bestFitIndiv = currentIndiv;

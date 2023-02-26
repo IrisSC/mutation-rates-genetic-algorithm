@@ -40,7 +40,6 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 	 */
 	@Override
 	public void mutation() {
-		System.out.print(" " + 2);
 		//goes through every gene in the solution
 		for(int i=0; i < solutionChromosome.length; i++) {
 			double mutate = rand.nextDouble();

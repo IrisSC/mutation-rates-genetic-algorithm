@@ -68,7 +68,6 @@ public class IndivStaticMutate extends Individual{
 	 */
 	@Override
 	public void mutation() {
-		System.out.print(" " + 1);
 		//goes through every gene in the solution
 		for(int i=0; i < solutionChromosome.length; i++) {
 			double mutate = rand.nextDouble();

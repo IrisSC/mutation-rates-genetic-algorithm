@@ -22,7 +22,7 @@ public class GeneticAlgorithm {
 		int populationSize = 101;
 		int tournamentSize = 5;
 		int numGenerations = 300;
-		int numRuns = 100;
+		int numRuns = 10;
 		
 		
 		//create stuff to print data into excel
