@@ -135,7 +135,7 @@ public class Population {
 	 * 		This function returns the average or mean fitness of the population 
 	 */
 	public double avgFitness() {
-		double totalFitness = 0;
+		double totalFitness = 0.0;
 		double totalIndivs = 0.0;
 		
 		for(int i = 0; i < pop.size(); i++) {
@@ -143,7 +143,7 @@ public class Population {
 			if(this.knapsack.isValid(indiv)) {
 				int fitness = knapsack.fitness(indiv);
 				totalFitness = totalFitness + fitness;
-				totalIndivs =+ 1;
+				totalIndivs = totalIndivs + 1;
 			}
 		}
 		return Math.round((totalFitness/totalIndivs)*100.0)/100.0;

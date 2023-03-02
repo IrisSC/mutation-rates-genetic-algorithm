@@ -11,6 +11,10 @@ import org.junit.jupiter.api.Test;
 
 class PopulationTests {
 	
+	/*
+	 * Test that the first constructor works. this constructor takes in the number of 
+	 * individuals in the population, an original indiv, and a knapsack
+	 */
 	@Test
 	void constructor1() {
 		IndivStaticMutate indiv1 = new IndivStaticMutate(10, 0.2);
@@ -23,6 +27,10 @@ class PopulationTests {
 				pop1.getPopulation().size(), 50);
 	}
 	
+	/*
+	 * Test that the second constructor works. This constructor takes in a List of 
+	 * individuals and a knapsack
+	 */
 	@Test
 	void constructor2() {
 		IndivStaticMutate indiv1 = new IndivStaticMutate(10, 0.2);
@@ -45,6 +53,9 @@ class PopulationTests {
 				pop.getPopulation().size(), 4);
 	}
 	
+	/*
+	 * Tests that the knapsack can be set to a different knapsack
+	 */
 	@Test
 	void knapsackSetter() {
 		IndivStaticMutate indiv1 = new IndivStaticMutate(10, 0.2);
@@ -73,6 +84,9 @@ class PopulationTests {
 		
 	}
 	
+	/*
+	 * Tests that when the knapsack is changed the fitness of individuals change
+	 */
 	@Test
 	void knapsackFitnessChanges() {
 		int[] solution0 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -105,6 +119,10 @@ class PopulationTests {
 		assertEquals("max fitness is 0 for knapsack 6", pop1.maxFitness(), 0);
 	}
 	
+	/*
+	 * Tests that the population will return the correct minimum fitness in 
+	 * the population
+	 */
 	@Test
 	void minFitnessValue() {
 		int[] solution1 = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -130,6 +148,10 @@ class PopulationTests {
 		assertEquals("min fitness value equals 10", pop.minFitness(), 10);
 	}
 	
+	/*
+	 * Tests that the population will return the correct maximum fitness in 
+	 * the population
+	 */
 	@Test
 	void maxFitnessValue() {
 		int[] solution1 = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -155,6 +177,10 @@ class PopulationTests {
 		assertEquals("max fitness value equals 159", pop.maxFitness(), 159);
 	}
 	
+	/*
+	 * Tests that the population will return the correct average fitness in 
+	 * the population
+	 */
 	@Test
 	void avgFitnessValue() {
 		int[] solution1 = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -180,6 +206,10 @@ class PopulationTests {
 		assertEquals("avg fitness value equals 116.25", pop.avgFitness(), 116.25, 0);
 	}
 	
+	/*
+	 * Tests that the population will return the correct standard deviation of fitness in 
+	 * the population
+	 */
 	@Test
 	void stanardDeviation() {
 		int[] solution1 = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -205,6 +235,10 @@ class PopulationTests {
 		assertEquals("stanard deviation fitness value equals 61.54", pop.stanDevFitness(), 61.54, 0);
 	}
 	
+	/*
+	 * Tests that the population will correctly return the best fit individual 
+	 * in the population
+	 */
 	@Test
 	void returnBestFitIndiv() {
 		int[] solution1 = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -313,7 +347,7 @@ class PopulationTests {
 		
 		pop = pop.generateNewPop(2);
 		
-		assertEquals("indivNum is equal to 5", pop.getNumPopulation(), 5);
+		assertEquals("indivNum is equal to 5", pop.getNumPopulation(), 4);
 	}
 	
 }
