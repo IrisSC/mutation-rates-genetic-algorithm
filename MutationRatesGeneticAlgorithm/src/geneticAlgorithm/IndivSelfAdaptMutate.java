@@ -76,6 +76,9 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 	 */
 	@Override
 	public List<Individual> crossover(Individual in){
+		//cast
+		IndivSelfAdaptMutate insa = (IndivSelfAdaptMutate)in;
+		
 		//Random rand = new Random();
 		int crossoverpoint = (int)this.length/2;
 		
@@ -94,7 +97,7 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		}
 		
 		IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(newSolution1, this.mutationRate);
-		IndivSelfAdaptMutate indiv2 = new IndivSelfAdaptMutate(newSolution2, in.mutationRate);
+		IndivSelfAdaptMutate indiv2 = new IndivSelfAdaptMutate(newSolution2, insa.mutationRate);
 		newSolution.add(indiv1);
 		newSolution.add(indiv2);
 		

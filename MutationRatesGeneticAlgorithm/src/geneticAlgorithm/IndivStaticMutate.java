@@ -8,6 +8,8 @@ import java.util.Random;
 
 public class IndivStaticMutate extends Individual{
 	
+	protected double mutationRate;
+	
 	/*
 	 * IndivStaticMutate constructor.
 	 * takes in solutionLength and mutationRate
