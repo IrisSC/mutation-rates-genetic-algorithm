@@ -1,11 +1,11 @@
 package geneticAlgorithm;
 
-public class KnapSack1 extends Knapsack{
+public class Knapsack1 extends Knapsack{
 	/*
 	 * Knapsack1 constructor
 	 * sets the cap, weights, and values of this Knapsack Problem
 	 */
-	public KnapSack1() {
+	public Knapsack1() {
 		this.cap = 269;
 		this.maxValue = 295;
 		int[] weight = {95, 4, 60, 32, 23, 72, 80, 62, 65, 46};

@@ -103,6 +103,12 @@ public abstract class Individual {
 	public abstract double getMutationRate();
 	
 	/*
+	 * @return String
+	 * 		the name of the type of Individual that the solution is
+	 */
+	public abstract String getType();
+	
+	/*
 	 * @returns the length of the solution
 	 */
 	public int getLength() {

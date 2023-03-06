@@ -5,26 +5,46 @@ import java.util.List;
 
 public class IndivSelfAdaptMutate extends IndivStaticMutate{
 	
+	//The mutation rate for the mutation rate
 	protected double mutateRate;
 
+	/*
+	 * Constructor for the self-adaptive individual
+	 * @param int, double
+	 * 		takes in the solution length and mutation rate
+	 */
 	public IndivSelfAdaptMutate(int solutionLength, double mutationRate) {
 		super(solutionLength, mutationRate);
 		
 		mutateRate = 0.5;
 	}
 	
+	/*
+	 * Constructor for the self-adaptive individual
+	 * @param int[], double
+	 * 		takes in the solution and mutation rate
+	 */
 	public IndivSelfAdaptMutate(int[] solution, double mutationRate) {
 		super(solution, mutationRate);
 		
 		mutateRate = 0.5;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.IndivStaticMutate#mutation()
+	 * 
+	 * 		Generates random double between 0 and 1 for each gene
+	 * id random number is less than mutationRate the gene is mutated
+	 * 		Same is done for the mutation rate
+	 */
+	@Override
 	public void mutation() {
 		//goes through every gene in the solution
 		for(int i=0; i < solutionChromosome.length; i++) {
 			double mutate = rand.nextDouble();
 			//if random double is less then the static mutation rate then mutate
-			if(mutate <= staticMutationRate) {
+			if(mutate <= mutationRate) {
 				if(solutionChromosome[i] == 1) {
 					solutionChromosome[i] = 0;
 				}else {
@@ -36,17 +56,29 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		//mutate mutation rate
 		double mutateMutationRate = rand.nextDouble();
 		if(mutateMutationRate <= this.mutateRate) {
-			double mutate = rand.nextGaussian()*0.01;
-			if(this.staticMutationRate + mutate >= 0) {
-				this.staticMutationRate = this.staticMutationRate + mutate;
-			}
-			else {
-				this.staticMutationRate = 0.0;
+			double mutate = rand.nextGaussian()*0.05;
+			if(this.mutationRate + mutate < 0) {
+				this.mutationRate = 0.0;
+			}else {
+				this.mutationRate = this.mutationRate + mutate;
 			}
 		}
 	}
 	
-	public List<Individual> crossover(IndivSelfAdaptMutate in){
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.IndivStaticMutate#crossover(geneticAlgorithm.Individual)
+	 * 
+	 * @param Individual in
+	 * 		the individual that this individual is being crossed over with
+	 * @returns List<Individual>
+	 * 		returns the new solutions created from crossover
+	 */
+	@Override
+	public List<Individual> crossover(Individual in){
+		//cast
+		IndivSelfAdaptMutate insa = (IndivSelfAdaptMutate)in;
+		
 		//Random rand = new Random();
 		int crossoverpoint = (int)this.length/2;
 		
@@ -64,8 +96,8 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 			newSolution2[j] = this.solutionChromosome[j];
 		}
 		
-		IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(newSolution1, this.staticMutationRate);
-		IndivSelfAdaptMutate indiv2 = new IndivSelfAdaptMutate(newSolution2, in.staticMutationRate);
+		IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(newSolution1, this.mutationRate);
+		IndivSelfAdaptMutate indiv2 = new IndivSelfAdaptMutate(newSolution2, insa.mutationRate);
 		newSolution.add(indiv1);
 		newSolution.add(indiv2);
 		
@@ -79,9 +111,36 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 	 * 		a randomly generated slef adpating mutation rate individual
 	 */
 	public Individual createRandomIndiv() {
+		double mutationRate = rand.nextDouble();
+		
 		//create new individual
-		IndivSelfAdaptMutate indiv = new IndivSelfAdaptMutate(this.length, this.staticMutationRate);
+		IndivSelfAdaptMutate indiv = new IndivSelfAdaptMutate(this.length, this.mutationRate);
 				
 		return indiv;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.Individual#copy()
+	 * @return Individual
+	 * 		a deep copy of an individual
+	 */
+	@Override
+	public Individual copy() {
+		IndivSelfAdaptMutate copyIndiv = new IndivSelfAdaptMutate(this.solutionChromosome.clone(), this.mutationRate);
+		return copyIndiv;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.IndivStaticMutate#getType()
+	 * 
+	 * @returns String
+	 * 		returns the String "Self-Adaptive" since this is the self-adaptive
+	 *  mutation rate individual
+	 */
+	@Override
+	public String getType() {
+		return "Self-Adaptive";
 	}
 }

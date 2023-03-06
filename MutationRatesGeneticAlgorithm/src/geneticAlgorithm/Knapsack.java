@@ -121,6 +121,7 @@ public abstract class Knapsack {
 			return totValue;
 		}
 	}
+	
 	/*
 	 * @param Individual
 	 * 		The individual that we are checking is valid

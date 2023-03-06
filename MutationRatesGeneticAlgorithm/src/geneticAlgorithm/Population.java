@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Population {
+	//List of all the individuals in the population
 	List<Individual> pop = new ArrayList<Individual>();
+	//number of individuals in the population
 	int numPop;
+	//knapsack that the fitness if passed off of
 	Knapsack knapsack;
 	//create random object
 	protected static Random rand = new Random();
@@ -81,6 +84,15 @@ public class Population {
 		this.numPop = this.numPop + 1;
 	}
 	
+	/*
+	 * This method removes an individual to the population. And decreases the population
+	 * size by one
+	 */
+	public void removeIndiv(int index) {
+		this.pop.remove(index);
+		this.numPop = this.numPop - 1;
+	}
+	
 	/* 
 	 * @return int
 	 * 		This function returns the max fitness of the population
@@ -123,7 +135,7 @@ public class Population {
 	 * 		This function returns the average or mean fitness of the population 
 	 */
 	public double avgFitness() {
-		double totalFitness = 0;
+		double totalFitness = 0.0;
 		double totalIndivs = 0.0;
 		
 		for(int i = 0; i < pop.size(); i++) {
@@ -131,7 +143,7 @@ public class Population {
 			if(this.knapsack.isValid(indiv)) {
 				int fitness = knapsack.fitness(indiv);
 				totalFitness = totalFitness + fitness;
-				totalIndivs =+ 1;
+				totalIndivs = totalIndivs + 1;
 			}
 		}
 		return Math.round((totalFitness/totalIndivs)*100.0)/100.0;
@@ -174,6 +186,13 @@ public class Population {
 		return totalMutationRate/(double)this.pop.size();
 	}
 	
+	/*
+	 * @param int
+	 * 		the size of the tournament
+	 * @return Individual
+	 * 		The best fit individual that was selected for the tournament. This will
+	 * be used as a parent individual
+	 */
 	public Individual getParent(int tournamnetSize) {
 		int currentIndiv = rand.nextInt(this.numPop);
 		int bestFitIndiv = currentIndiv;
@@ -244,17 +263,15 @@ public class Population {
 		for(int i = 0; i < newPop.getNumPopulation(); i++) {
 			newPop.getPopulation().get(i).mutation();
 		}
-		//System.out.println(this.knapsack.fitness(bestFit));
-		newPop.addIndiv(bestFit);
 		
 		//add best fit individual
-		/*if(this.pop.size() % 2 == 1) {
+		if(this.pop.size() % 2 == 1) {
 			newPop.addIndiv(bestFit);
 		}
 		else if(this.pop.size() % 2 == 0) {
-			newPop.getPopulation().remove(newPop.getNumPopulation()-1);
+			newPop.removeIndiv(newPop.getNumPopulation()-1);
 			newPop.addIndiv(getBestFitIndiv());
-		}*/
+		}
 		
 		return newPop;
 	}

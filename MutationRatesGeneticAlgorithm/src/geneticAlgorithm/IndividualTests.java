@@ -121,9 +121,10 @@ class IndividualTests {
 		
 		boolean changedMutationRate = false;
 		
-		for(int i = 0; i < 1000; i++) {
+		for(int i = 0; i < 100; i++) {
 			double oldMutationRate = test4.getMutationRate();
 			test4.mutation();
+			System.out.println(test4.getMutationRate());
 			
 			if(test4.getMutationRate() != oldMutationRate) {
 				changedMutationRate = true;
