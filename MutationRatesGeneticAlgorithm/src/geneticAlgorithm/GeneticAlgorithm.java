@@ -20,7 +20,7 @@ public class GeneticAlgorithm {
 	public static void main(String[] args) throws IOException {
 		//setting sizes
 		int populationSize = 100;
-		int tournamentSize = 2;
+		int tournamentSize = 2; 
 		int numGenerations = 100;
 		int numRuns = 100;
 		
@@ -99,8 +99,6 @@ public class GeneticAlgorithm {
 					GATestData.put(Integer.toString(i + 2),new Object[] { Integer.toString(pop.maxFitness()), 
 							Integer.toString(pop.minFitness()), Double.toString(pop.avgFitness())});
 				}*/
-				
-				//System.out.println(pop.maxFitness());
 			}
 			
 			//print out information 
