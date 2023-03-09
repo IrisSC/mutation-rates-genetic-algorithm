@@ -1,5 +1,6 @@
 package geneticAlgorithm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IndivGlobalGeneSpecMutate extends Individual{
@@ -69,14 +70,42 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 
 	@Override
 	public void mutation() {
-		// TODO Auto-generated method stub
+		
 		
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.Individual#crossover(geneticAlgorithm.Individual)
+	 * @param Individaul
+	 * 		takes in the second parent individual who will be used to create offspring
+	 * @return <List> Individual
+	 * 		two children individuals. these individuals are of the type IndivGlobalGeneSpecMutate
+	 */
 	@Override
 	public List<Individual> crossover(Individual in) {
-		// TODO Auto-generated method stub
-		return null;
+		//Random rand = new Random();
+		int crossoverpoint = (int)this.length/2;
+		
+		List<Individual> newSolution = new ArrayList<Individual>();
+		
+		int[] newSolution1 = new int[this.length];
+		int[] newSolution2 = new int[this.length];
+		
+		for(int i = 0; i < crossoverpoint; i++) {
+			newSolution1[i] = this.solutionChromosome[i];
+			newSolution2[i] = in.solutionChromosome[i];
+		}
+		for(int j = crossoverpoint; j < this.length; j++) {
+			newSolution1[j] = in.solutionChromosome[j];
+			newSolution2[j] = this.solutionChromosome[j];
+		}
+		
+		IndivGlobalGeneSpecMutate indiv1 = new IndivGlobalGeneSpecMutate(newSolution1);
+		IndivGlobalGeneSpecMutate indiv2 = new IndivGlobalGeneSpecMutate(newSolution2);
+		newSolution.add(indiv1);
+		newSolution.add(indiv2);
+		
+		return newSolution;
 	}
 
 	@Override
