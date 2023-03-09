@@ -5,15 +5,44 @@ import java.util.List;
 public class IndivGlobalGeneSpecMutate extends Individual{
 	
 	protected static double[] mutationRates;
-
-	public IndivGlobalGeneSpecMutate(int solutionLength) {
+	
+	/*
+	 * Constructor: creates random solution and the mutation rates to all be the same
+	 */
+	public IndivGlobalGeneSpecMutate(int solutionLength, double initalMutationRate) {
 		super(solutionLength);
-		// TODO Auto-generated constructor stub
+
+		this.mutationRates = new double[solutionLength];
+		for(int i = 0; i < this.mutationRates.length; i++) {
+			this.mutationRates[i] = initalMutationRate;
+		}
 	}
 	
+	/*
+	 * Constructor: takes in a solution and an array of mutation rates, setting the 
+	 * 		solution to the solution chromosome and the mutation rates array
+	 * 		to the static double array
+	 */
+	public IndivGlobalGeneSpecMutate(int[] solution, double[] mutationRates) {
+		super(solution);
+		
+		this.mutationRates = mutationRates;
+	}
+	
+	/*
+	 * Constructor: creates a random array, but does not change the static mutation rate 
+	 * 		array
+	 */
+	public IndivGlobalGeneSpecMutate(int solutionLength) {
+		super(solutionLength);
+	}
+	
+	/*
+	 * Constructor: sets a solution to a new individual. Does not change the static
+	 * 		mutation rate array
+	 */
 	public IndivGlobalGeneSpecMutate(int[] solution) {
 		super(solution);
-		// TODO Auto-generated constructor stub
 	}
 
 	/*
@@ -65,8 +94,7 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 	@Override
 	public Individual copy() {
 		//create copy of individual
-		IndivGlobalGeneSpecMutate copyIndiv = 
-						new IndivGlobalGeneSpecMutate(this.solutionChromosome.clone());
+		IndivGlobalGeneSpecMutate copyIndiv = new IndivGlobalGeneSpecMutate(this.solutionChromosome.clone());
 		return copyIndiv;
 	}
 	
