@@ -21,7 +21,7 @@ public class GeneticAlgorithm {
 		//setting sizes
 		int populationSize = 100;
 		int tournamentSize = 2; 
-		int numGenerations = 100;
+		int numGenerations = 500;
 		int numRuns = 100;
 		
 		
@@ -61,8 +61,8 @@ public class GeneticAlgorithm {
 		//the number of runs for the GA
 		for(int j = 0; j < numRuns; j++) {
 			//create static mutation individual
-			IndivStaticMutate indiv1 = new IndivStaticMutate(sack1.weights.length, 0.05);
-			//IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(sack1.weights.length, 0.2);
+			//IndivStaticMutate indiv1 = new IndivStaticMutate(sack1.weights.length, 0.01);
+			IndivSelfAdaptMutate indiv1 = new IndivSelfAdaptMutate(sack1.weights.length, 0.2);
 			
 			//create population
 			Population pop = new Population(populationSize, indiv1, sack1);
@@ -152,11 +152,16 @@ public class GeneticAlgorithm {
 			avgStandDev = Math.round(Math.sqrt(avgStandDev/numRuns)*100.0)/100.0;
 			mutationRateStandDev = Math.round(Math.sqrt(mutationRateStandDev/numRuns)*100.0)/100.0;
 			
-			//int lastMax = max[numGenerations-1][j];
+			//this is not correct
+			//int lastMax = max[i][numRuns-1];
+			int lastMax = 0;
+			if(i < numRuns) {
+				lastMax = max[numGenerations-1][i];
+			}
 			
 			GATestData.add(new Object[] {Integer.toString(i), Double.toString((double)(maxTotal)/(double)numRuns), 
 					Double.toString((double)(minTotal)/(double)numRuns), Double.toString((double)(avgTotal)/(double)numRuns),
-					Double.toString(maxStandDev), Double.toString(avgStandDev), Integer.toString(max[numGenerations-1][i]),
+					Double.toString(maxStandDev), Double.toString(avgStandDev), Integer.toString(lastMax),
 					Double.toString(mutationRateTotal/(double)numRuns), Double.toString(mutationRateStandDev)});
 			
 		}
