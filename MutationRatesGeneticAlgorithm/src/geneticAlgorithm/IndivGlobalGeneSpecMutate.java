@@ -107,11 +107,17 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 		
 		return newSolution;
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.Individual#createRandomIndiv()
+	 * @return Individual
+	 * 		a IndivGlobalGeneSpecMutate individual with a random solution
+	 */
 	@Override
 	public Individual createRandomIndiv() {
-		// TODO Auto-generated method stub
-		return null;
+		IndivGlobalGeneSpecMutate randIndiv = new IndivGlobalGeneSpecMutate(this.length);
+		return randIndiv;
 	}
 	
 	/*
