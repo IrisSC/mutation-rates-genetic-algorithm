@@ -3,6 +3,8 @@ package geneticAlgorithm;
 import java.util.List;
 
 public class IndivGlobalGeneSpecMutate extends Individual{
+	
+	protected static double[] mutationRates;
 
 	public IndivGlobalGeneSpecMutate(int solutionLength) {
 		super(solutionLength);
