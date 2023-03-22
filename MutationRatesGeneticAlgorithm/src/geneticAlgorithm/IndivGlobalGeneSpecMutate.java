@@ -7,15 +7,27 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 	
 	protected static double[] mutationRates;
 	
+	protected static Knapsack sack;
+	
+	protected double mutateRate;
+	
+	protected int[] mutationValue;
+	
 	/*
 	 * Constructor: creates random solution and the mutation rates to all be the same
 	 */
-	public IndivGlobalGeneSpecMutate(int solutionLength, double initalMutationRate) {
+	public IndivGlobalGeneSpecMutate(int solutionLength, double initalMutationRate, Knapsack sack) {
 		super(solutionLength);
+		
+		this.sack = sack;
+		
+		this.mutateRate = 0.5;
 
 		this.mutationRates = new double[solutionLength];
+		this.mutationValue = new int[solutionLength];
 		for(int i = 0; i < this.mutationRates.length; i++) {
 			this.mutationRates[i] = initalMutationRate;
+			this.mutationValue[i] = 0;
 		}
 	}
 	
@@ -24,10 +36,19 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 	 * 		solution to the solution chromosome and the mutation rates array
 	 * 		to the static double array
 	 */
-	public IndivGlobalGeneSpecMutate(int[] solution, double[] mutationRates) {
+	public IndivGlobalGeneSpecMutate(int[] solution, double[] mutationRates, Knapsack sack) {
 		super(solution);
 		
+		this.sack = sack;
+		
+		this.mutateRate = 0.5;
+		
 		this.mutationRates = mutationRates;
+		
+		this.mutationValue = new int[solution.length];
+		for(int i = 0; i < this.mutationRates.length; i++) {
+			this.mutationValue[i] = 0;
+		}
 	}
 	
 	/*
@@ -36,6 +57,13 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 	 */
 	public IndivGlobalGeneSpecMutate(int solutionLength) {
 		super(solutionLength);
+		
+		this.mutateRate = 0.5;
+		
+		this.mutationValue = new int[solutionLength];
+		for(int i = 0; i < this.mutationRates.length; i++) {
+			this.mutationValue[i] = 0;
+		}
 	}
 	
 	/*
@@ -44,6 +72,13 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 	 */
 	public IndivGlobalGeneSpecMutate(int[] solution) {
 		super(solution);
+		
+		this.mutateRate = 0.5;
+		
+		this.mutationValue = new int[solution.length];
+		for(int i = 0; i < this.mutationRates.length; i++) {
+			this.mutationValue[i] = 0;
+		}
 	}
 
 	/*
@@ -67,10 +102,66 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 		
 		return true;
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see geneticAlgorithm.Individual#mutation()
+	 * 
+	 * Mutates every each according to the mutation rate of that specific gene. Will
+	 * then mutate the mutation rate using a Gausain distribution. The Gaussian 
+	 * distrubition gets moved one stand deviation to the right if mutating that gene has 
+	 * a postive effect and 1 stand deviation to the left if mutating that gene has a 
+	 * negative effect
+	 */
 	@Override
 	public void mutation() {
+		//go through every gene
+		for(int i = 0; i < this.solutionChromosome.length; i++) {
+			double mutate = this.rand.nextDouble();
+			if(mutate < this.mutationRates[i]) {
+				//safe fitness of individual
+				IndivGlobalGeneSpecMutate copyIndiv0 = new IndivGlobalGeneSpecMutate(this.solutionChromosome);
+				int fitnessBefore = sack.fitness(copyIndiv0);
+				
+				//mutate gene
+				if(solutionChromosome[i] == 1) {
+					solutionChromosome[i] = 0;
+				}else {
+					solutionChromosome[i] = 1;
+				}
+				
+				//get new fitness of individual
+				IndivGlobalGeneSpecMutate copyIndiv1 = new IndivGlobalGeneSpecMutate(this.solutionChromosome);
+				int fitnessAfter = sack.fitness(copyIndiv1);
+				
+				//record if mutation was good or bad
+				if(fitnessBefore > fitnessAfter) {
+					mutationValue[i] = mutationValue[i] - 1;
+				}else if(fitnessBefore < fitnessAfter){
+					mutationValue[i] = mutationValue[i] + 1;
+				}
+			}
+		}
 		
+		//mutate mutation rates
+		for(int i = 0; i < this.mutationValue.length; i++) {
+			double mutateMutation = this.rand.nextDouble();
+			if(mutateMutation < this.mutateRate) {
+				double mutate = rand.nextGaussian()*0.05;
+				if(mutationValue[i] > 0) {
+					mutate = mutate + 0.05;
+				}else if(mutationValue[i] < 0) {
+					mutate = mutate - 0.05;
+				}
+				
+				//make sure mutation rate does not go below zero
+				if(this.mutationRates[i] + mutate < 0) {
+					this.mutationRates[i] = 0.0;
+				}else {
+					this.mutationRates[i] = this.mutationRates[i] + mutate;
+				}
+			}
+		}
 		
 	}
 	/*
