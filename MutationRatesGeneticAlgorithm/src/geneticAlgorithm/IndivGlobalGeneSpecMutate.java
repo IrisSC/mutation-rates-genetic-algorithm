@@ -142,7 +142,6 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 				}
 			}
 		}
-		
 		//mutate mutation rates
 		for(int i = 0; i < this.mutationValue.length; i++) {
 			double mutateMutation = this.rand.nextDouble();
@@ -164,6 +163,7 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 		}
 		
 	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see geneticAlgorithm.Individual#crossover(geneticAlgorithm.Individual)
@@ -227,11 +227,25 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 	/*
 	 * (non-Javadoc)
 	 * @see geneticAlgorithm.Individual#getMutationRate()
+	 * 
+	 * @return double
+	 * 		the average of the mutation rates
 	 */
 	@Override
 	public double getMutationRate() {
-		
-		return 0;
+		double avgMutationRate = 0.0;
+		for(int i = 0; i < this.mutationRates.length; i++) {
+			avgMutationRate = avgMutationRate + this.mutationRates[i];
+		}
+		return avgMutationRate/(double)this.mutationRates.length;
+	}
+	
+	/*
+	 * @return double[]
+	 * 		the array of mutation rates
+	 */
+	public double[] getMutationRates() {
+		return this.mutationRates;
 	}
 
 	/*
