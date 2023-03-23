@@ -289,7 +289,25 @@ class IndividualTests {
 	
 	@Test
 	void globalGeneSpecificCopy() {
+		double[] mutationRates = {0.4, 0.4, 0.4, 0.4, 0.4, 0.3, 0.3, 0.3, 0.3, 0.3, 0.2, 
+				0.2, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1};
+		Knapsack2 sack = new Knapsack2();
+		int[] solution = {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1};
 		
+		//create individual
+		IndivGlobalGeneSpecMutate indiv = new IndivGlobalGeneSpecMutate(solution, 
+				mutationRates, sack);
+		
+		//create copy
+		IndivGlobalGeneSpecMutate indivCopy = (IndivGlobalGeneSpecMutate) indiv.copy();
+		
+		//change original indiv
+		int[] newSolution = {1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1};
+		
+		indiv.setSolutionChromosome(newSolution);
+		
+		//test that a deep copy was made
+		assertFalse("the two individuals do not equal ech other", indiv.equals(indivCopy));
 	}
 	
 	@Test
