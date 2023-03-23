@@ -220,4 +220,60 @@ class IndividualTests {
 		assertEquals("gene at index 0 is 0", copyIndiv.getSolutionChromosome()[0], 1);
 		
 	}
+	
+	/*
+	 * Tests the constructors for the global gene specific individual
+	 */
+	@Test
+	void globalGeneSpecificConstructors() {
+		
+		//intialize all the needed informtaion
+		double mutationRate = 0.3;
+		double[] mutationRates = {0.4, 0.4, 0.4, 0.4, 0.4, 0.3, 0.3, 0.3, 0.3, 0.3, 0.2, 
+				0.2, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1};
+		Knapsack2 sack = new Knapsack2();
+		int solutionLength = 20;
+		int[] solution = {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1};
+		
+		//test constructor 0
+		IndivGlobalGeneSpecMutate indiv0 = new IndivGlobalGeneSpecMutate(solutionLength, 
+				mutationRate, sack);
+		
+		assertEquals("the average mutation rate should be 0.3", 
+				Math.round(indiv0.getMutationRate()*100)/(double)100, 0.3, 0);
+		assertEquals("any mutation rate should be 0.3", indiv0.getMutationRates()[5], 
+				0.3, 0);
+		assertEquals("length of mutationRates is 20", indiv0.getMutationRates().length, 20);
+		
+		//test constructor 2
+		IndivGlobalGeneSpecMutate indiv2 = new IndivGlobalGeneSpecMutate(solutionLength);
+		
+		assertEquals("the average mutation rate for indiv2 is should be 0.3", 
+				Math.round(indiv2.getMutationRate()*100)/(double)100, 0.3, 0);
+		assertEquals("the mutation rate for any gene should be 0.3", 
+				indiv2.getMutationRates()[7], 0.3, 0);
+		assertEquals("length of mutationRates is 20", indiv0.getMutationRates().length, 20);
+		
+		//test constructor 1
+		IndivGlobalGeneSpecMutate indiv1 = new IndivGlobalGeneSpecMutate(solution, 
+				mutationRates, sack);
+		
+		assertEquals("the average mutation rate is should be 0.25", 
+				Math.round(indiv1.getMutationRate()*100)/(double)100, 0.25, 0);
+		assertEquals("the mutation rate for gene 0 should be 0.4", 
+				indiv1.getMutationRates()[0], 0.4, 0);
+		assertEquals("the mutation rate for gene 10 should be 0.2", 
+				indiv1.getMutationRates()[10], 0.2, 0);
+		
+		//test constructor 3
+		IndivGlobalGeneSpecMutate indiv3 = new IndivGlobalGeneSpecMutate(solution);
+		
+		assertEquals("the average mutation rate for indiv2 is should be 0.25", 
+				Math.round(indiv3.getMutationRate()*100)/(double)100, 0.25, 0);
+		assertEquals("the mutation rate for gene 0 should be 0.4", 
+				indiv3.getMutationRates()[0], 0.4, 0);
+		assertEquals("the mutation rate for gene 10 should be 0.2", 
+				indiv3.getMutationRates()[10], 0.2, 0);
+		assertEquals("length of mutationRates is 20", indiv0.getMutationRates().length, 20);
+	}
 }
