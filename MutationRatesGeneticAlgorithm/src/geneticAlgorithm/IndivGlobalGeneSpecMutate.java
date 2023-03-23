@@ -160,8 +160,9 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 					this.mutationRates[i] = this.mutationRates[i] + mutate;
 				}
 			}
+			//reset mutationValue
+			this.mutationValue[i] = 0;
 		}
-		
 	}
 	
 	/*
@@ -246,6 +247,22 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 	 */
 	public double[] getMutationRates() {
 		return this.mutationRates;
+	}
+	
+	/*
+	 * @param double[]
+	 * 		the new mutation rates
+	 */
+	public void setMutationRates(double[] mutationRates) {
+		this.mutationRates = mutationRates;
+	}
+	
+	/*
+	 * @param int[]
+	 * 		The new mutation value array
+	 */
+	public void setMutationValue(int[] mutationValue) {
+		this.mutationValue = mutationValue;
 	}
 
 	/*

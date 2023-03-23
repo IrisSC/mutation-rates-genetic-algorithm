@@ -1,5 +1,6 @@
 package geneticAlgorithm;
 
+import java.util.Random;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -277,14 +278,86 @@ class IndividualTests {
 		assertEquals("length of mutationRates is 20", indiv0.getMutationRates().length, 20);
 	}
 	
+	/*
+	 * Tests that the Gaussian average should be 0.05 on average: This was done for my own 
+	 * sanity
+	 */
 	@Test
-	void globalGeneSpecificMutation() {
+	void guausianDistribution() {
+		Random rand = new Random();
+		double avg = 0.0;
+		int numRuns = 50000;
+		for(int i = 0; i < numRuns; i++) {
+			double mutate = rand.nextGaussian()*0.05;
+			mutate = mutate + 0.05;
+			avg = avg + mutate;
+		}
 		
+		assertEquals("Gaussian mean is 0.05", Math.round(avg/(double)numRuns*100)/(double)100,
+				0.05, 0);
 	}
 	
 	@Test
-	void globalGeneSpecificCreateRandom() {
+	void globalGeneSpecificMutation() {
+		//intialize all the needed informtaion
+		double mutationRate = 0.3;
+		Knapsack2 sack = new Knapsack2();
+		int solutionLength = 20;
+		int[] mutationValuesPositive = {20, 20, 20, 20, 20, 
+				20, 20, 2, 2, 2, 
+				2, 2, 2, 2, 2,
+				2, 2, 2, 2, 2};
+		int[] mutationValuesNegative = {-2, -2, -2, -2, -2,
+				-2, -2, -2, -2, -2, 
+				-2, -2, -2, -2, -2,
+				-2, -2, -2, -2, -2};
 		
+		//create individual
+		IndivGlobalGeneSpecMutate indiv = new IndivGlobalGeneSpecMutate(solutionLength, 
+				mutationRate, sack);
+		
+		//set them to be positive
+		double positiveMutations = 0.0;
+		int numsMutated = 0;
+		for(int i = 0; i < 1000; i++) {
+			indiv.setMutationValue(mutationValuesPositive.clone());
+			double[] oldMutationRates = indiv.getMutationRates().clone();
+			
+			indiv.mutation();
+			
+			for(int j =0; j < solutionLength; j++) {
+				if(oldMutationRates[j] != indiv.getMutationRates()[j]) {
+					positiveMutations = positiveMutations + 
+							(indiv.getMutationRates()[j] - oldMutationRates[j]);
+					numsMutated = numsMutated + 1;
+				}
+			}
+			indiv.setMutationRates(oldMutationRates);
+		}
+		
+		assertEquals("positive mutations should average 0.05", 
+				Math.round((positiveMutations/(double)numsMutated)*100)/(double)100, 0.05, 0);
+		
+		//test the negative direction
+		double negativeMutations = 0.0;
+		numsMutated = 0;
+		for(int i = 0; i < 1000; i++) {
+			indiv.setMutationValue(mutationValuesNegative.clone());
+			double[] oldMutationRates = indiv.getMutationRates().clone();
+			
+			indiv.mutation();
+			
+			for(int j =0; j < solutionLength; j++) {
+				if(oldMutationRates[j] != indiv.getMutationRates()[j]) {
+					negativeMutations = negativeMutations + 
+							(indiv.getMutationRates()[j] - oldMutationRates[j]);
+					numsMutated = numsMutated + 1;
+				}
+			}
+			indiv.setMutationRates(oldMutationRates);
+		}
+		assertEquals("negative mutations should average -0.05", 
+				Math.round((negativeMutations/(double)numsMutated)*100)/(double)100, -0.05, 0);
 	}
 	
 	@Test
