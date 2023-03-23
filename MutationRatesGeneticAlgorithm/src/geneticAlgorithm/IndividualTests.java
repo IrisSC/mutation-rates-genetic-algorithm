@@ -276,4 +276,35 @@ class IndividualTests {
 				indiv3.getMutationRates()[10], 0.2, 0);
 		assertEquals("length of mutationRates is 20", indiv0.getMutationRates().length, 20);
 	}
+	
+	@Test
+	void globalGeneSpecificMutation() {
+		
+	}
+	
+	@Test
+	void globalGeneSpecificCreateRandom() {
+		
+	}
+	
+	@Test
+	void globalGeneSpecificCopy() {
+		
+	}
+	
+	@Test
+	void globalGeneSpecificGetType() {
+		//intialize all the needed informtaion
+		double mutationRate = 0.3;
+		Knapsack2 sack = new Knapsack2();
+		int solutionLength = 20;
+		
+		//create individual
+		IndivGlobalGeneSpecMutate indiv = new IndivGlobalGeneSpecMutate(solutionLength, 
+				mutationRate, sack);
+		
+		//test type of individual
+		assertEquals("Individual is a Global Gene specific Type", indiv.getType(), 
+				"Global Gene Specific Mutation");
+	}
 }
