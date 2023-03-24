@@ -121,4 +121,11 @@ public abstract class Individual {
 	public int[] getSolutionChromosome() {
 		return this.solutionChromosome;
 	}
+	
+	/*
+	 * @param the solution
+	 */
+	public void setSolutionChromosome(int[] solution) {
+		this.solutionChromosome = solution;
+	}
 }

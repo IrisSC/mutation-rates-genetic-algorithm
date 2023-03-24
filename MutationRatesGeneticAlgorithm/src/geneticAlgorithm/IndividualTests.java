@@ -1,5 +1,6 @@
 package geneticAlgorithm;
 
+import java.util.Random;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -219,5 +220,182 @@ class IndividualTests {
 		assertEquals("gene at index 0 is 0", originalIndiv.getSolutionChromosome()[0], 0);
 		assertEquals("gene at index 0 is 0", copyIndiv.getSolutionChromosome()[0], 1);
 		
+	}
+	
+	/*
+	 * Tests the constructors for the global gene specific individual
+	 */
+	@Test
+	void globalGeneSpecificConstructors() {
+		
+		//intialize all the needed informtaion
+		double mutationRate = 0.3;
+		double[] mutationRates = {0.4, 0.4, 0.4, 0.4, 0.4, 0.3, 0.3, 0.3, 0.3, 0.3, 0.2, 
+				0.2, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1};
+		Knapsack2 sack = new Knapsack2();
+		int solutionLength = 20;
+		int[] solution = {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1};
+		
+		//test constructor 0
+		IndivGlobalGeneSpecMutate indiv0 = new IndivGlobalGeneSpecMutate(solutionLength, 
+				mutationRate, sack);
+		
+		assertEquals("the average mutation rate should be 0.3", 
+				Math.round(indiv0.getMutationRate()*100)/(double)100, 0.3, 0);
+		assertEquals("any mutation rate should be 0.3", indiv0.getMutationRates()[5], 
+				0.3, 0);
+		assertEquals("length of mutationRates is 20", indiv0.getMutationRates().length, 20);
+		
+		//test constructor 2
+		IndivGlobalGeneSpecMutate indiv2 = new IndivGlobalGeneSpecMutate(solutionLength);
+		
+		assertEquals("the average mutation rate for indiv2 is should be 0.3", 
+				Math.round(indiv2.getMutationRate()*100)/(double)100, 0.3, 0);
+		assertEquals("the mutation rate for any gene should be 0.3", 
+				indiv2.getMutationRates()[7], 0.3, 0);
+		assertEquals("length of mutationRates is 20", indiv0.getMutationRates().length, 20);
+		
+		//test constructor 1
+		IndivGlobalGeneSpecMutate indiv1 = new IndivGlobalGeneSpecMutate(solution, 
+				mutationRates, sack);
+		
+		assertEquals("the average mutation rate is should be 0.25", 
+				Math.round(indiv1.getMutationRate()*100)/(double)100, 0.25, 0);
+		assertEquals("the mutation rate for gene 0 should be 0.4", 
+				indiv1.getMutationRates()[0], 0.4, 0);
+		assertEquals("the mutation rate for gene 10 should be 0.2", 
+				indiv1.getMutationRates()[10], 0.2, 0);
+		
+		//test constructor 3
+		IndivGlobalGeneSpecMutate indiv3 = new IndivGlobalGeneSpecMutate(solution);
+		
+		assertEquals("the average mutation rate for indiv2 is should be 0.25", 
+				Math.round(indiv3.getMutationRate()*100)/(double)100, 0.25, 0);
+		assertEquals("the mutation rate for gene 0 should be 0.4", 
+				indiv3.getMutationRates()[0], 0.4, 0);
+		assertEquals("the mutation rate for gene 10 should be 0.2", 
+				indiv3.getMutationRates()[10], 0.2, 0);
+		assertEquals("length of mutationRates is 20", indiv0.getMutationRates().length, 20);
+	}
+	
+	/*
+	 * Tests that the Gaussian average should be 0.05 on average: This was done for my own 
+	 * sanity
+	 */
+	@Test
+	void guausianDistribution() {
+		Random rand = new Random();
+		double avg = 0.0;
+		int numRuns = 50000;
+		for(int i = 0; i < numRuns; i++) {
+			double mutate = rand.nextGaussian()*0.05;
+			mutate = mutate + 0.05;
+			avg = avg + mutate;
+		}
+		
+		assertEquals("Gaussian mean is 0.05", Math.round(avg/(double)numRuns*100)/(double)100,
+				0.05, 0);
+	}
+	
+	@Test
+	void globalGeneSpecificMutation() {
+		//intialize all the needed informtaion
+		double mutationRate = 0.3;
+		Knapsack2 sack = new Knapsack2();
+		int solutionLength = 20;
+		int[] mutationValuesPositive = {20, 20, 20, 20, 20, 
+				20, 20, 2, 2, 2, 
+				2, 2, 2, 2, 2,
+				2, 2, 2, 2, 2};
+		int[] mutationValuesNegative = {-2, -2, -2, -2, -2,
+				-2, -2, -2, -2, -2, 
+				-2, -2, -2, -2, -2,
+				-2, -2, -2, -2, -2};
+		
+		//create individual
+		IndivGlobalGeneSpecMutate indiv = new IndivGlobalGeneSpecMutate(solutionLength, 
+				mutationRate, sack);
+		
+		//set them to be positive
+		double positiveMutations = 0.0;
+		int numsMutated = 0;
+		for(int i = 0; i < 1000; i++) {
+			indiv.setMutationValue(mutationValuesPositive.clone());
+			double[] oldMutationRates = indiv.getMutationRates().clone();
+			
+			indiv.mutation();
+			
+			for(int j =0; j < solutionLength; j++) {
+				if(oldMutationRates[j] != indiv.getMutationRates()[j]) {
+					positiveMutations = positiveMutations + 
+							(indiv.getMutationRates()[j] - oldMutationRates[j]);
+					numsMutated = numsMutated + 1;
+				}
+			}
+			indiv.setMutationRates(oldMutationRates);
+		}
+		
+		assertEquals("positive mutations should average 0.05", 
+				Math.round((positiveMutations/(double)numsMutated)*100)/(double)100, 0.05, 0);
+		
+		//test the negative direction
+		double negativeMutations = 0.0;
+		numsMutated = 0;
+		for(int i = 0; i < 1000; i++) {
+			indiv.setMutationValue(mutationValuesNegative.clone());
+			double[] oldMutationRates = indiv.getMutationRates().clone();
+			
+			indiv.mutation();
+			
+			for(int j =0; j < solutionLength; j++) {
+				if(oldMutationRates[j] != indiv.getMutationRates()[j]) {
+					negativeMutations = negativeMutations + 
+							(indiv.getMutationRates()[j] - oldMutationRates[j]);
+					numsMutated = numsMutated + 1;
+				}
+			}
+			indiv.setMutationRates(oldMutationRates);
+		}
+		assertEquals("negative mutations should average -0.05", 
+				Math.round((negativeMutations/(double)numsMutated)*100)/(double)100, -0.05, 0);
+	}
+	
+	@Test
+	void globalGeneSpecificCopy() {
+		double[] mutationRates = {0.4, 0.4, 0.4, 0.4, 0.4, 0.3, 0.3, 0.3, 0.3, 0.3, 0.2, 
+				0.2, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1};
+		Knapsack2 sack = new Knapsack2();
+		int[] solution = {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1};
+		
+		//create individual
+		IndivGlobalGeneSpecMutate indiv = new IndivGlobalGeneSpecMutate(solution, 
+				mutationRates, sack);
+		
+		//create copy
+		IndivGlobalGeneSpecMutate indivCopy = (IndivGlobalGeneSpecMutate) indiv.copy();
+		
+		//change original indiv
+		int[] newSolution = {1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1};
+		
+		indiv.setSolutionChromosome(newSolution);
+		
+		//test that a deep copy was made
+		assertFalse("the two individuals do not equal ech other", indiv.equals(indivCopy));
+	}
+	
+	@Test
+	void globalGeneSpecificGetType() {
+		//intialize all the needed informtaion
+		double mutationRate = 0.3;
+		Knapsack2 sack = new Knapsack2();
+		int solutionLength = 20;
+		
+		//create individual
+		IndivGlobalGeneSpecMutate indiv = new IndivGlobalGeneSpecMutate(solutionLength, 
+				mutationRate, sack);
+		
+		//test type of individual
+		assertEquals("Individual is a Global Gene specific Type", indiv.getType(), 
+				"Global Gene Specific Mutation");
 	}
 }
