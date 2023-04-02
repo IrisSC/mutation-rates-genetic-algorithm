@@ -45,7 +45,8 @@ public class GeneticAlgorithm {
 		//Knapsack4 sack1 = new Knapsack4();
 		//Knapsack5 sack1 = new Knapsack5();
 		//Knapsack9 sack1 = new Knapsack9();
-		Knapsack10 sack1 = new Knapsack10();
+		//Knapsack10 sack1 = new Knapsack10();
+		Knapsack11 sack1 = new Knapsack11();
 		//Knapsack6 sack1 = new Knapsack6();
 		//Knapsack7 sack2 = new Knapsack7();
 		//Knapsack8 sack3 = new Knapsack8();
