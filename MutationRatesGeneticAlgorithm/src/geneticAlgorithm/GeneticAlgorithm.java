@@ -21,8 +21,8 @@ public class GeneticAlgorithm {
 		//setting sizes
 		int populationSize = 100;
 		int tournamentSize = 2; 
-		int numGenerations = 500;
-		int numRuns = 100;
+		int numGenerations = 50;
+		int numRuns = 1;
 		
 		
 		//create stuff to print data into excel
@@ -43,7 +43,10 @@ public class GeneticAlgorithm {
 		//Knapsack2 sack1 = new Knapsack2();
 		//Knapsack3 sack1 = new Knapsack3();
 		//Knapsack4 sack1 = new Knapsack4();
-		Knapsack5 sack1 = new Knapsack5();
+		//Knapsack5 sack1 = new Knapsack5();
+		//Knapsack9 sack1 = new Knapsack9();
+		//Knapsack10 sack1 = new Knapsack10();
+		Knapsack11 sack1 = new Knapsack11();
 		//Knapsack6 sack1 = new Knapsack6();
 		//Knapsack7 sack2 = new Knapsack7();
 		//Knapsack8 sack3 = new Knapsack8();
