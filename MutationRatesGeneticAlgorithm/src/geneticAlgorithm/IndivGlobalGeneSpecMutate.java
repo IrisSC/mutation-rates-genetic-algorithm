@@ -146,16 +146,18 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 		for(int i = 0; i < this.mutationValue.length; i++) {
 			double mutateMutation = this.rand.nextDouble();
 			if(mutateMutation < this.mutateRate) {
-				double mutate = rand.nextGaussian()*0.05;
+				double mutate = rand.nextGaussian()*0.0005;
 				if(mutationValue[i] > 0) {
-					mutate = mutate + 0.05;
+					mutate = mutate + 0.0005;
 				}else if(mutationValue[i] < 0) {
-					mutate = mutate - 0.05;
+					mutate = mutate - 0.0005;
 				}
 				
 				//make sure mutation rate does not go below zero
-				if(this.mutationRates[i] + mutate < 0) {
-					this.mutationRates[i] = 0.0;
+				if(this.mutationRates[i] + mutate < (double)1/(double)this.solutionChromosome.length) {
+					this.mutationRates[i] = (double)1/(double)this.solutionChromosome.length;
+				}else if(this.mutationRates[i] + mutate > 1.0){
+					this.mutationRates[i] = 1.0;
 				}else {
 					this.mutationRates[i] = this.mutationRates[i] + mutate;
 				}
@@ -237,7 +239,9 @@ public class IndivGlobalGeneSpecMutate extends Individual{
 		double avgMutationRate = 0.0;
 		for(int i = 0; i < this.mutationRates.length; i++) {
 			avgMutationRate = avgMutationRate + this.mutationRates[i];
+			//System.out.println(this.mutationRates[i]); 
 		}
+		//System.out.println(avgMutationRate/(double)this.mutationRates.length);
 		return avgMutationRate/(double)this.mutationRates.length;
 	}
 	

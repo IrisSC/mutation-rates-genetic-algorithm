@@ -56,9 +56,11 @@ public class IndivSelfAdaptMutate extends IndivStaticMutate{
 		//mutate mutation rate
 		double mutateMutationRate = rand.nextDouble();
 		if(mutateMutationRate <= this.mutateRate) {
-			double mutate = rand.nextGaussian()*0.05;
-			if(this.mutationRate + mutate < (double)1/(double)this.solutionChromosome.length) {
-				this.mutationRate = (double)1/(double)this.solutionChromosome.length;
+			double mutate = rand.nextGaussian()*0.01;
+			if(this.mutationRate + mutate < 0.0) {
+				//(double)1/(double)this.solutionChromosome.length
+				this.mutateRate = 0.0;
+				//this.mutationRate = (double)1/(double)this.solutionChromosome.length;
 			}else {
 				this.mutationRate = this.mutationRate + mutate;
 			}
