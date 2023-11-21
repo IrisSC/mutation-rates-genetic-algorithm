@@ -1,4 +1,25 @@
 # mutation-rates-genetic-algorithm
-This repository is the location where all code for Iris Shaker-Check's undergrad 
-research project will be located. Adding this is also a test to figure out how
-github works with eclipes. More information will be added later. 
+
+<h2>Purpose of Repository:</h2>
+(coming soon)
+
+<h2>What is a Genetic Algorithm:</h2>
+(coming soon)
+
+<h2>The KnapSack Problem:</h2>
+(coming soon)
+
+<h2>Structure of the Genetic Algorithm:</h2>
+(coming soon)
+
+<h2>Fitness Functions: </h2>
+(coming soon)
+
+<h2>The Importance of Mutations: </h2>
+(coming soon)
+
+<h2>Types of mutation used: </h2>
+<p>(coming soon)</p>
+
+<h2>Current Results: </h2>
+(coming soon)
