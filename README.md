@@ -18,7 +18,15 @@ The Knapsack Problem is where there is a knapsack with a weight limit. There are
 This research specifically focuses on GA with the Knapsack Problem, since it is an optimization problem which Genetic Algorithms are particularly adept at solving. The Knapsack Problem is also an NP-Hard problem which makes it a difficult problem to solve efficiently. Therefore, making a Genetic Algorithm that can solve problems more accurately will give a better way of solving the Knapsack Problem and other NP-Hard problems efficiently. This research tests self-adapting mutation rates, gene specific self-adapting mutation rates, and static mutation rates.
 
 <h4>Structure of the Genetic Algorithm:</h4>
-(coming soon)
+The GA for this research project was written in Java and took advantage of Object Oriented Programming. 
+
+Each knapsack problem inherits from the abstract knapsack class. The abstract knapsack class contains all the setter, getters, and the fitness function for the knapsack problems. Thus to create a new knapsack problem all that is needed are the cap, weights, and values of the knapsack.
+
+For the individual classes there is also an abstract class. This abstract individual class has constructors that can create and set a solution. It also has abstract methods for mutation, crossover, equals, copy, and getMutationRate. Having these abstract methods allows for all individuals who inherit from the abstract individual class to be used interchangeably in other classes. 
+
+The population object is initialized with a knapsack object and an array list of individuals. The population object allows the GA to analyze the population as a whole with methods such as getParent, maxFitness, averageFitness, etc. 
+
+The GA is run in the geneticAlgorithms class. The geneticAlgorithms class is where the type of mutation rate, number of individuals, knapsack problem, tournament size, number of generations, and number of times the algorithm is run is set. This is also the class that prints the data to an excel spreadsheet.
 
 <h4>Fitness Functions: </h4>
 (coming soon)
