@@ -31,10 +31,7 @@ The GA is run in the geneticAlgorithms class. The geneticAlgorithms class is whe
 <h4>Fitness Functions: </h4>
 When using a GA to solve an optimization problem there is a function that determines how well adapted or optimal an individual is. This function is called the fitness function. The fitness function takes an individual and outputs a fitness value for that individual. The fitness function should represent the objective of the problem that is being solved. The fitness function for the Knapsack Problem that was developed for this research is below:
 
-(equation coming soon)
-![Equation1](/repository/mutation-rates-genetic-algorithm/FitnessFunctionEquation1.png?raw=true)
-![Alt text](URL "/FitnessFunctionEquation1.png")
-<img src="./FitnessFunctionEquation1.png"/>
+<img src="./FitnessFunctionEquation1.png" alt="Equation 1"/>
 
 The n is the number of items and the C is the cap weight of the knapsack.  The v is a List of values for all the items. The w is a List of weights for all the items.The g represents whether an item is placed in the knapsack and will either be a 1 or a 0. The fitness of each individual will be the sum of the values of the items in the knapsack, unless the weight exceeds the cap. If the weight exceeds the cap weight then the fitness is zero. 
 
@@ -44,7 +41,7 @@ There are two different ways of changing the fitness function that have been use
 
 A new fitness function was developed that used the penalization method. It is shown below in equation 2 and equation 3:
 
-(equation coming soon)
+<img src="./FitnessFunctionEquation2.png" alt="Equation 2 and 3"/>
 
 The new fitness function returns the sum of the values of all the items in the knapsack minus a penalty. If the weights of all the items in the knapsack are below or equal to the cap then the penalty is zero. Otherwise the penalty is ten times the amount the weight goes over the cap.
 
