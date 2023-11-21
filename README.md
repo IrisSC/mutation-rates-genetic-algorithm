@@ -29,7 +29,31 @@ The population object is initialized with a knapsack object and an array list of
 The GA is run in the geneticAlgorithms class. The geneticAlgorithms class is where the type of mutation rate, number of individuals, knapsack problem, tournament size, number of generations, and number of times the algorithm is run is set. This is also the class that prints the data to an excel spreadsheet.
 
 <h4>Fitness Functions: </h4>
-(coming soon)
+When using a GA to solve an optimization problem there is a function that determines how well adapted or optimal an individual is. This function is called the fitness function. The fitness function takes an individual and outputs a fitness value for that individual. The fitness function should represent the objective of the problem that is being solved. The fitness function for the Knapsack Problem that was developed for this research is below:
+
+(equation coming soon)
+![Equation1](/repository/mutation-rates-genetic-algorithm/FitnessFunctionEquation1.png?raw=true)
+![Alt text](URL "/FitnessFunctionEquation1.png")
+<img src="./FitnessFunctionEquation1.png"/>
+
+The n is the number of items and the C is the cap weight of the knapsack.  The v is a List of values for all the items. The w is a List of weights for all the items.The g represents whether an item is placed in the knapsack and will either be a 1 or a 0. The fitness of each individual will be the sum of the values of the items in the knapsack, unless the weight exceeds the cap. If the weight exceeds the cap weight then the fitness is zero. 
+
+While this fitness function works, it does disincentivize any individual from being over the cap. Decreasing these individuals' chances for reproduction is valuable since the GA needs to produce a valid optimal solution. However, it is also beneficial to keep the genetic diversity that these individuals have. The fitness function also treats every individual that goes over the cap weight the same, not taking into account that some individuals will go over the cap more than others. 
+
+There are two different ways of changing the fitness function that have been used for the individuals that go over the cap weight. These are the repair operation and penalization method. The repair operation is when items are removed from the knapsack at random until the weight of the items in the knapsack is below the cap. With this method the genetic diversity of the population could still be lost. For the penalization method, if an individual’s weight exceeds the cap then the value of the individual is penalized. It is crucial that an individual is penalized enough that the fitness of the individual is less than the optimal solution. The penalization method was used in this research since it allows for the GA to retain the genetic diversity and for individuals that exceed the cap to be penalized differently based on how much they go over. 
+
+A new fitness function was developed that used the penalization method. It is shown below in equation 2 and equation 3:
+
+(equation coming soon)
+
+The new fitness function returns the sum of the values of all the items in the knapsack minus a penalty. If the weights of all the items in the knapsack are below or equal to the cap then the penalty is zero. Otherwise the penalty is ten times the amount the weight goes over the cap.
+
+The new fitness function and the old fitness function were then tested on three different knapsack problems. One knapsack had 50 items (KS3), another had 80 items (KS4), and the last knapsack problem had 100 items (KS5). Each of these knapsack problems were run 100 times with both fitness functions. Each run had 100 generations and 100 individuals in the population. The average maximum fitness, average average fitness, and average minimum fitness was taken at every generation. 
+
+The average maximum is slightly higher in the new fitness function represented by Equations 2 & 3 than the original fitness function represented by equation 1, however this increase was not significant. There were significant increases in the average average fitness and the average minimum fitness. This increase was likely due to the decrease in fitness values being zero. 
+
+Both fitness functions are available in the abstract knapsack class to experiment with.
+
 
 <h4>The Importance of Mutations: </h4>
 (coming soon)
