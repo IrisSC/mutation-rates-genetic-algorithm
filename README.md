@@ -41,7 +41,7 @@ There are two different ways of changing the fitness function that have been use
 
 A new fitness function was developed that used the penalization method. It is shown below in equation 2 and equation 3:
 
-<img src="./FitnessFunctionEquation2.png" alt="Equation 2 and 3"/>
+<img src="./FitnessFunctionEquation2&3.png" alt="Equation 2 and 3"/>
 
 The new fitness function returns the sum of the values of all the items in the knapsack minus a penalty. If the weights of all the items in the knapsack are below or equal to the cap then the penalty is zero. Otherwise the penalty is ten times the amount the weight goes over the cap.
 
