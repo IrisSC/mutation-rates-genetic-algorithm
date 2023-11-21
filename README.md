@@ -13,7 +13,9 @@ Over many generations, the goal is to find the optimal solution to a problem. Th
 For more information on GAs and terminology see: <a href="https://www.tutorialspoint.com/genetic_algorithms/index.htm"> https://www.tutorialspoint.com/genetic_algorithms/index.htm </a>
 
 <h4>The KnapSack Problem:</h4>
-(coming soon)
+The Knapsack Problem is where there is a knapsack with a weight limit. There are also items that have a weight and a value. The weight of all the items exceeds the weight limit of the knapsack. The goal of the Knapsack Problem is to find the set of items that maximizes the value in the knapsack, but does not exceed the weight of the knapsack. 
+
+This research specifically focuses on GA with the Knapsack Problem, since it is an optimization problem which Genetic Algorithms are particularly adept at solving. The Knapsack Problem is also an NP-Hard problem which makes it a difficult problem to solve efficiently. Therefore, making a Genetic Algorithm that can solve problems more accurately will give a better way of solving the Knapsack Problem and other NP-Hard problems efficiently. This research tests self-adapting mutation rates, gene specific self-adapting mutation rates, and static mutation rates.
 
 <h4>Structure of the Genetic Algorithm:</h4>
 (coming soon)
