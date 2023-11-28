@@ -42,7 +42,7 @@ public class GeneticAlgorithm {
         List<Object[]> mutationData = new ArrayList<Object[]>();
 		
 		//create knapsack
-		//Knapsack1 sack1 = new Knapsack1();
+		Knapsack1 sack1 = new Knapsack1();
 		//Knapsack2 sack1 = new Knapsack2();
 		//Knapsack3 sack1 = new Knapsack3();
 		//Knapsack4 sack1 = new Knapsack4();
@@ -53,7 +53,7 @@ public class GeneticAlgorithm {
 		//Knapsack6 sack1 = new Knapsack6();
 		//Knapsack7 sack2 = new Knapsack7();
 		//Knapsack8 sack3 = new Knapsack8();
-		Knapsack12 sack1 = new Knapsack12();
+		//Knapsack12 sack1 = new Knapsack12();
 		
 		//create array to store the data from multiple runs
 		int[][] max = new int[numGenerations][numRuns];
@@ -250,7 +250,7 @@ public class GeneticAlgorithm {
         // .xlsx is the format for Excel Sheets...
         // writing the workbook into the file...
         FileOutputStream out = new FileOutputStream(
-            new File("C:/Users/19IrisOS/Desktop/Dickinson College/Comp Sci Research Project/researchDataTest.xlsx"));
+            new File("C:/Users/iriss/OneDrive/Documents/GAResearch/researchDataTest.xlsx"));
   
         workbook.write(out);
         out.close();
