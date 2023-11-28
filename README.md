@@ -59,8 +59,17 @@ The larger a mutation rate is, the more “genetic diversity” could be added t
 
 It is unknown where in the solution space the optimal solution is located. For this reason it is important for the population to “explore” the solution space, which mutations allow for. However, having a mutation rate which is too high can decrease the chances of finding the optimal solution. For example, if a solution is close to the optimal solution it would be more advantageous for that solution's offspring to be in the solution space around the solution instead of “exploring” other regions of the solution space. In general it is considered better to “explore” more of the solution space early on in the algorithm and exploit or explore less as the algorithm continues. Thus it is important to have the correct or “goldilocks” mutation rate.
 
-<h4>Types of mutation used: </h4>
-<p>(coming soon)</p>
+<h4>Types of Mutation Used: </h4>
+In the most basic GAs mutations are represented as a static rate. However, past research has developed other types of mutation rates such as self-adaptive mutation rates. This research focuses on static mutation rates, self-adapting mutation rates, and global gene specific mutation rates.
+<br> <br>
+<u>Static Mutation Rates:</u><br>
+A static mutation rate is set by the developer. This rate is represented by a percentage. Then for each gene a random number is generated. This random number is typically between 0 and 1, but can change based on the algorithm. If the randomly generated number is below the percentage then that gene is mutated. If the number is above the percentage then the gene is not mutated. For example, if the mutation rate was 0.02 then on average two percent of all genes would get mutated.
+<br><br>
+<u>Self-Adaptive Mutation Rates:</u><br>
+Self-adapting mutation rates are similar to static mutation rates in that the rate is a percentage. Where self-adapting mutation rates differ is that self-adapting mutation rates are represented as a gene in the individuals. Representing the mutation rate as a gene allows for the mutation rate to evolve along with the other genes that an individual has. Having a self-adaptive mutation rate allows for the population to explore the solution space only when needed. Self-adapting mutations have been shown to outperform static mutation rates. 
+<br><br>
+<u>Global Gene Specific Self-Adapting Mutation Rates:</u><br>
+Past research on mutation rates has focused on having a singular mutation rate that mutates all genes. In this research, a mutation rate for each gene was introduced. Since GAs perform better with different mutation rates at different parts of the problem solving process, it is possible that GAs will perform better with individual mutation rates for each gene. During the process of solving a problem there may be specific genes that are more beneficial to mutate than others. This follows what we know of genetics, some genes in organisms are more predisposed to mutation then others. The mutation rates for each gene were placed in a global list. After an individual is mutated, the fitness of the new individual will be checked. If that fitness is higher than the fitness of the individual before having been mutated then the mutation rates for the genes mutated will be increased. However if the mutation does not increase the fitness of the individual, then that mutation rate will be decreased. This goes beyond what happens in genetics. In nature, it is not possible to see if a mutation was beneficial to the organism until it has a chance to reproduce. However, in GAs there is the ability to check if a mutation was beneficial for the individual.
 
 <h4>Current Results: </h4>
 (coming soon)
