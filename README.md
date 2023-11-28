@@ -54,7 +54,7 @@ Both fitness functions are available in the abstract knapsack class to experimen
 
 <h4>The Importance of Mutations: </h4>
 Mutations allow for variations in the genetic makeup of individuals to be added to the population. For example, let's say that there is a knapsack problem where the optimal solution requires the first item to be placed in the knapsack. However, none of the current solutions in the population have the first item placed into the knapsack. With just parent selection and crossover there would be no way of finding the optimal solution, but since mutations “randomly” change the alleles of genes a solution could be mutated to place the first item in the kanspack. Often these mutations do not have a significant effect on an individual's fitness, but sometimes the mutations can create individuals who are better or worse adapted for their environment. 
-
+<br>
 The larger a mutation rate is, the more “genetic diversity” could be added to the population, which would increase chances of exploring more parts of the solution space. The solution space represents all possible solutions for which the population is a subset. For example, a three dimensional solution space would resemble a landscape where there are high points and low points (mountains and valleys). Depending on the optimization problem the algorithm would try to find either the global maximum or minimum in that landscape. This concept applies no matter how many dimensions the solution space exists in. The solution space for GAs is n-dimensional where n is the number of genes. 
 
 It is unknown where in the solution space the optimal solution is located. For this reason it is important for the population to “explore” the solution space, which mutations allow for. However, having a mutation rate which is too high can decrease the chances of finding the optimal solution. For example, if a solution is close to the optimal solution it would be more advantageous for that solution's offspring to be in the solution space around the solution instead of “exploring” other regions of the solution space. In general it is considered better to “explore” more of the solution space early on in the algorithm and exploit or explore less as the algorithm continues. Thus it is important to have the correct or “goldilocks” mutation rate.
@@ -62,10 +62,10 @@ It is unknown where in the solution space the optimal solution is located. For t
 <h4>Types of Mutation Used: </h4>
 In the most basic GAs mutations are represented as a static rate. However, past research has developed other types of mutation rates such as self-adaptive mutation rates. This research focuses on static mutation rates, self-adapting mutation rates, and global gene specific mutation rates.
 <br> <br>
-<u>Static Mutation Rates:</u><br>
+<ins>Static Mutation Rates:</ins><br>
 A static mutation rate is set by the developer. This rate is represented by a percentage. Then for each gene a random number is generated. This random number is typically between 0 and 1, but can change based on the algorithm. If the randomly generated number is below the percentage then that gene is mutated. If the number is above the percentage then the gene is not mutated. For example, if the mutation rate was 0.02 then on average two percent of all genes would get mutated.
 <br><br>
-<u>Self-Adaptive Mutation Rates:</u><br>
+<ins>Self-Adaptive Mutation Rates:</ins><br>
 Self-adapting mutation rates are similar to static mutation rates in that the rate is a percentage. Where self-adapting mutation rates differ is that self-adapting mutation rates are represented as a gene in the individuals. Representing the mutation rate as a gene allows for the mutation rate to evolve along with the other genes that an individual has. Having a self-adaptive mutation rate allows for the population to explore the solution space only when needed. Self-adapting mutations have been shown to outperform static mutation rates. 
 <br><br>
 <ins>Global Gene Specific Self-Adapting Mutation Rates:</ins><br>
